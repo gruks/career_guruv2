@@ -5,6 +5,7 @@ from career.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, R
 from career.users.utils import save_picture, send_reset_email
 from career.models import User
 from flask_login import login_user, current_user, logout_user, login_required
+from .jwt_utils import generate_access_token, verify_access_token
 import secrets
 from PIL import Image
 
@@ -22,6 +23,11 @@ def register():
         db.session.add(user)
         db.session.commit()
         login_user(user)
+        # Generate JWT token
+        access_token = generate_access_token(user.id)
+        # If API request, return JSON with token
+        if request.is_json or request.headers.get('Accept') == 'application/json':
+            return {"access_token": access_token, "user_id": user.id}, 201
         return redirect(url_for('main.onboarding'))
     return render_template('register.html', title='Register', form=form)
 
@@ -35,12 +41,52 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
+            # Generate JWT token
+            access_token = generate_access_token(user.id)
+            # If API request, return JSON with token
+            if request.is_json or request.headers.get('Accept') == 'application/json':
+                return {"access_token": access_token, "user_id": user.id}, 200
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('main.home'))
         else:
             flash('Invalid email or password', 'danger')
             return redirect(url_for('users.login'))
     return render_template('login.html', title='Login', form=form)
+
+# Example: Token-protected API route
+from flask import jsonify
+from functools import wraps
+
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = None
+        if 'Authorization' in request.headers:
+            auth_header = request.headers['Authorization']
+            if auth_header.startswith('Bearer '):
+                token = auth_header.split(' ')[1]
+        if not token:
+            return jsonify({'message': 'Token is missing!'}), 401
+        user_id = verify_access_token(token)
+        if not user_id:
+            return jsonify({'message': 'Token is invalid or expired!'}), 401
+        # Optionally, set user context here
+        return f(user_id=user_id, *args, **kwargs)
+    return decorated
+
+# Example API endpoint using token authentication
+@users.route('/api/profile', methods=['GET'])
+@token_required
+def api_profile(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({'message': 'User not found'}), 404
+    return jsonify({
+        'id': user.id,
+        'username': user.username,
+        'email': user.email,
+        'image_file': user.image_file
+    })
 
 
 @users.route("/logout")
