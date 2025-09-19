@@ -503,6 +503,173 @@
             "Executive Director"
           ]
         }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "Bachelor's in Business Administration",
+            "Bachelor's in Management"
+          ],
+          "relevant_courses": [
+            "Principles of Marketing",
+            "Organizational Behavior",
+            "Financial Management",
+            "Human Resource Management",
+            "Leadership and Change"
+          ],
+          "skills": [
+            "Strategic Planning",
+            "Financial Analysis",
+            "Management",
+            "Leadership",
+            "Communication"
+          ],
+          "internships_and_experience": [
+            "Business Intern at a startup company",
+            "Team leader of a group project",
+            "Volunteer for a non-profit organization"
+          ],
+          "certifications": [
+            "Certified Management Accountant (CMA)",
+            "Certified Business Administrator (CBA)"
+          ],
+          "future_roles": [
+            "Management Consultant",
+            "Business Analyst",
+            "Operations Manager",
+            "Entrepreneur"
+          ]
+        }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business, technology, science, innovation, entrepreneurship, sustainability"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "BSc Business Administration",
+            "BBA in Entrepreneurship"
+          ],
+          "relevant_courses": [
+            "Business Statistics",
+            "Financial Management",
+            "Innovation Management",
+            "Entrepreneurial Finance",
+            "Sustainability in Business"
+          ],
+          "skills": [
+            "Data analysis",
+            "Financial modeling",
+            "Marketing strategies",
+            "Leadership skills",
+            "Creativity and innovation"
+          ],
+          "internships_and_experience": [
+            "Summer internship at a startup",
+            "Volunteer work at a social enterprise"
+          ],
+          "certifications": [
+            "Certified Management Consultant",
+            "Certified Sustainability Practitioner"
+          ],
+          "future_roles": [
+            "Management Consultant",
+            "Entrepreneur",
+            "Sustainability Manager",
+            "Business Development Manager"
+          ]
+        }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "Bachelor of Business Administration (BBA)",
+            "Bachelor of Science in Business Administration (BSBA)"
+          ],
+          "relevant_courses": [
+            "Microeconomics",
+            "Macroeconomics",
+            "Business Statistics",
+            "Business Law",
+            "Financial Management",
+            "Marketing Management"
+          ],
+          "skills": [
+            "Financial Analysis",
+            "Data Analysis",
+            "Leadership",
+            "Time Management",
+            "Communication",
+            "Problem Solving"
+          ],
+          "internships_and_experience": [
+            "Sales Intern at XYZ Corporation",
+            "Marketing Research Assistant at AB Company"
+          ],
+          "certifications": [
+            "Certified Financial Analyst (CFA)",
+            "Certified Market Analyst (CMA)"
+          ],
+          "future_roles": [
+            "Business Analyst",
+            "Financial Manager",
+            "Marketing Manager",
+            "Entrepreneur"
+          ]
+        }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "Bachelor's in Business Administration",
+            "Bachelor's in Economics"
+          ],
+          "relevant_courses": [
+            "Foundations of Business",
+            "Microeconomics",
+            "Financial Management",
+            "Marketing Principles",
+            "Business Statistics"
+          ],
+          "skills": [
+            "Business Analysis",
+            "Financial Modeling",
+            "Market Research",
+            "Strategic Planning",
+            "Communication Skills"
+          ],
+          "internships_and_experience": [
+            "Management Trainee at a Fortune 500 Company",
+            "Marketing Intern at a Startup"
+          ],
+          "certifications": [
+            "Certified Management Accountant (CMA)",
+            "Certified Financial Analyst (CFA) Charterholder"
+          ],
+          "future_roles": [
+            "Financial Analyst",
+            "Business Development Manager",
+            "Marketing Manager",
+            "Operations Manager"
+          ]
+        }
       }
     ]
   }
