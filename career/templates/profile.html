@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Profile</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        background: #f5f5f5;
+        color: #333333;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s ease forwards;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      header {
+        background: #ffffff;
+        border-bottom: 1px solid #e0e0e0;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+        color: #222222;
+      }
+
+      .profile-container {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        gap: 2rem;
+        padding: 2rem 4rem;
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      .card {
+        background: #ffffff;
+        border-radius: 0.8rem;
+        padding: 1.5rem;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+      }
+
+      .card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .profile-info {
+        text-align: center;
+        word-wrap: break-word; /* ✅ long words/emails won’t overflow */
+      }
+
+      .profile-info img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 3px solid #dddddd;
+        margin-bottom: 1rem;
+      }
+
+      .profile-info h2 {
+        margin: 0.5rem 0;
+        color: #222222;
+        font-size: 1.2rem;
+      }
+
+      .profile-info p {
+        margin: 0.3rem 0;
+        font-size: 0.9rem;
+        color: #555555;
+        word-break: break-word; /* ✅ prevents email/location overflow */
+      }
+
+      .profile-info i {
+        margin-right: 6px;
+        color: #4caf50;
+      }
+
+      .edit-btn {
+        margin-top: 1rem;
+        background: #eeeeee;
+        color: #333333;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.4rem;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.3s;
+        font-size: 0.85rem;
+      }
+
+      .edit-btn i {
+        margin-right: 6px;
+      }
+
+      .edit-btn:hover {
+        background: #dddddd;
+        transform: scale(1.05);
+      }
+
+      .top-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .stats h3,
+      .courses h3,
+      .calendar h3,
+      .badges h3,
+      .recent h3 {
+        margin-bottom: 1rem;
+        color: #222222;
+        font-size: 1rem;
+      }
+
+      .badges .badge-icons {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 1rem;
+        gap: 2rem;
+      }
+
+      .badge-item {
+        text-align: center;
+        font-size: 0.85rem;
+      }
+
+      .badge-item i {
+        font-size: 2rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .gold {
+        color: #ffd700;
+      }
+
+      .silver {
+        color: #c0c0c0;
+      }
+
+      .bronze {
+        color: #cd7f32;
+      }
+
+      .courses ul,
+      .recent ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .courses li,
+      .recent li {
+        background: #f5f5f5;
+        margin-bottom: 0.5rem;
+        padding: 0.8rem;
+        border-radius: 0.4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.85rem;
+        transition: transform 0.3s;
+      }
+
+      .courses li:hover,
+      .recent li:hover {
+        transform: translateX(5px);
+      }
+
+      .courses i,
+      .recent i {
+        margin-right: 6px;
+        color: #4caf50;
+      }
+
+      .badge-label {
+        background: #4caf50;
+        color: #ffffff;
+        font-size: 0.7rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 0.3rem;
+        font-weight: bold;
+      }
+
+      /* Calendar Heatmap */
+      .calendar-grid {
+        display: flex;
+        gap: 8px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+      }
+
+      .month {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .month-label {
+        font-size: 0.7rem;
+        color: #777777;
+        margin-bottom: 0.5rem;
+      }
+
+      .weeks {
+        display: grid;
+        grid-template-rows: repeat(7, 1fr);
+        grid-auto-flow: column;
+        gap: 3px;
+      }
+
+      .day {
+        width: 11px;
+        height: 11px;
+        background: #e0e0e0;
+        border-radius: 2px;
+        transition: transform 0.2s, background 0.3s;
+      }
+
+      .day:hover {
+        transform: scale(1.3);
+      }
+
+      .level-1 {
+        background: #a5d6a7;
+      }
+
+      .level-2 {
+        background: #66bb6a;
+      }
+
+      .level-3 {
+        background: #388e3c;
+      }
+
+      .level-4 {
+        background: #1b5e20;
+      }
+
+      .calendar-footer {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        color: #555555;
+      }
+
+      footer {
+        text-align: center;
+        padding: 1rem;
+        background: #ffffff;
+        margin-top: 2rem;
+        font-size: 0.8rem;
+        color: #666666;
+        border-top: 1px solid #e0e0e0;
+      }
+
+      @media (max-width: 900px) {
+        .profile-container {
+          grid-template-columns: 1fr; /* stack into one column */
+          padding: 1.5rem;
+        }
+
+        .profile-info {
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 500px) {
+        .profile-info h2 {
+          font-size: 1rem;
+        }
+
+        .profile-info p {
+          font-size: 0.8rem;
+        }
+
+        .edit-btn {
+          font-size: 0.75rem;
+          padding: 0.4rem 0.8rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    {% extends "layout.html" %} {% block content %}
+
+    <div class="profile-container">
+      <!-- Left Profile Info -->
+      <div class="card profile-info">
+        <img src="{{ image_file }}" alt="Profile Picture" />
+        <h2>{{ current_user.username }}</h2>
+        <p>
+          <i class="fa-solid fa-envelope"></i>Email: {{ current_user.email }}
+        </p>
+        <p>
+          <i class="fa-solid fa-location-dot"></i>Location:
+          <span id="result"></span>
+        </p>
+        <button
+          class="edit-btn"
+          onclick="window.location.href=`{{ url_for('users.account') }}`"
+        >
+          <i class="fa-solid fa-pen"></i>Edit Profile
+        </button>
+      </div>
+
+      <!-- Right Main Content -->
+      <div>
+        <div class="top-row">
+          <div class="card stats">
+            <h3><i class="fa-solid fa-chart-line"></i> Stats</h3>
+            <p><strong>Courses Completed:</strong> 5</p>
+            <p><strong>Ongoing Courses:</strong> 2</p>
+          </div>
+
+          <div class="card badges">
+            <h3><i class="fa-solid fa-award"></i> Badges</h3>
+            <p><strong>Total Badges:</strong> 6</p>
+            <div class="badge-icons">
+              <div class="badge-item">
+                <i class="fa-solid fa-medal gold"></i>
+                <div>2 Gold</div>
+              </div>
+              <div class="badge-item">
+                <i class="fa-solid fa-medal silver"></i>
+                <div>3 Silver</div>
+              </div>
+              <div class="badge-item">
+                <i class="fa-solid fa-medal bronze"></i>
+                <div>1 Bronze</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card courses">
+          <h3><i class="fa-solid fa-book"></i> Courses</h3>
+          <ul>
+            <li>
+              <i class="fa-solid fa-check-circle"></i> Web Development Bootcamp
+              <span class="badge-label">Completed</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-check-circle"></i> Data Structures &
+              Algorithms <span class="badge-label">Completed</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-spinner"></i> Machine Learning Basics
+              <span class="badge-label">Ongoing</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-spinner"></i> Cloud Computing
+              <span class="badge-label">Ongoing</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card calendar">
+          <h3><i class="fa-solid fa-calendar-days"></i> Activity Calendar</h3>
+          <div class="calendar-grid" id="calendar"></div>
+          <div class="calendar-footer">
+            <p>
+              <i class="fa-solid fa-bolt"></i> Total Active Days:
+              <span id="activeDays">0</span>
+            </p>
+            <p>
+              <i class="fa-solid fa-fire"></i> Max Streak:
+              <span id="maxStreak">0</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="card recent">
+          <h3><i class="fa-solid fa-clock"></i> Recent Activity</h3>
+          <ul>
+            <li>
+              <i class="fa-solid fa-code"></i> Solved: Binary Tree Inorder
+              Traversal <span class="badge-label">Today</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-book-open"></i> Completed: SQL Basics
+              <span class="badge-label">Yesterday</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-code"></i> Solved: Two Sum Problem
+              <span class="badge-label">2 days ago</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <footer>© 2025 Student Dashboard | Built with ❤</footer>
+
+    <script>
+      const calendar = document.getElementById("calendar");
+      const months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      const today = new Date();
+      const year = today.getFullYear();
+
+      // Build calendar
+      months.forEach((month, mIndex) => {
+        const monthDiv = document.createElement("div");
+        monthDiv.classList.add("month");
+
+        const label = document.createElement("div");
+        label.classList.add("month-label");
+        label.innerText = month;
+        monthDiv.appendChild(label);
+
+        const weeks = document.createElement("div");
+        weeks.classList.add("weeks");
+
+        const daysInMonth = new Date(year, mIndex + 1, 0).getDate();
+
+        for (let d = 1; d <= daysInMonth; d++) {
+          const day = document.createElement("div");
+          day.classList.add("day");
+
+          const dateStr = `${year}-${String(mIndex + 1).padStart(
+            2,
+            "0"
+          )}-${String(d).padStart(2, "0")}`;
+          day.dataset.date = dateStr;
+
+          // Mark active days from localStorage
+          if (localStorage.getItem(dateStr)) {
+            day.classList.add("level-2");
+          }
+
+          // Highlight today
+          if (dateStr === today.toISOString().split("T")[0]) {
+            localStorage.setItem(dateStr, "1"); // store today
+            day.classList.add("level-3");
+          }
+
+          weeks.appendChild(day);
+        }
+
+        monthDiv.appendChild(weeks);
+        calendar.appendChild(monthDiv);
+      });
+
+      // Calculate stats
+      function calculateStats() {
+        const days = Object.keys(localStorage);
+        document.getElementById("activeDays").innerText = days.length;
+
+        let streak = 0,
+          maxStreak = 0;
+        let currentDate = new Date();
+
+        for (let i = 0; i < 365; i++) {
+          const dateStr = currentDate.toISOString().split("T")[0];
+          if (localStorage.getItem(dateStr)) {
+            streak++;
+            maxStreak = Math.max(maxStreak, streak);
+          } else {
+            streak = 0;
+          }
+          currentDate.setDate(currentDate.getDate() - 1);
+        }
+
+        document.getElementById("maxStreak").innerText = maxStreak;
+      }
+
+      calculateStats();
+
+      // Scroll animation
+      const cards = document.querySelectorAll(".card");
+      window.addEventListener("scroll", () => {
+        const triggerBottom = window.innerHeight * 0.9;
+        cards.forEach((card) => {
+          const cardTop = card.getBoundingClientRect().top;
+          if (cardTop < triggerBottom) {
+            card.classList.add("visible");
+          }
+        });
+      });
+
+      async function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            async (position) => {
+              const lat = position.coords.latitude;
+              const lon = position.coords.longitude;
+
+              const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+
+              try {
+                const res = await fetch(url);
+                const data = await res.json();
+
+                document.getElementById("result").textContent =
+                  data.display_name || "Location not found";
+              } catch (error) {
+                document.getElementById("result").textContent =
+                  "Error fetching location";
+                console.error(error);
+              }
+            },
+            () => {
+              document.getElementById("result").textContent =
+                "Permission denied or error detecting location.";
+            }
+          );
+        } else {
+          document.getElementById("result").textContent =
+            "Geolocation is not supported in this browser.";
+        }
+      }
+
+      getLocation();
+    </script>
+    {% endblock %}
+  </body>
+</html>

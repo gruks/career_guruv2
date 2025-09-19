@@ -1,0 +1,21 @@
+# Python gitignore 
+# Environment
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# SQLite database
+*.sqlite3
+
+# VSCode / PyCharm settings
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

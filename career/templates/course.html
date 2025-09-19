@@ -1,0 +1,190 @@
+{% extends "layout.html" %}
+{% block content %}
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(180deg, #fdfdfd, #f2f2f7);
+            margin: 0;
+            color: #1d1d1f;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 50px 0 40px;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #000;
+            letter-spacing: -0.6px;
+            animation: fadeInDown 0.8s ease forwards;
+        }
+
+        .contain {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 0.3s;
+        }
+
+        .goal-box {
+            background: #fff;
+            padding: 35px;
+            border-radius: 24px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transform: translateY(0);
+        }
+
+        .goal-box:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .goal-title {
+            font-weight: 600;
+            font-size: 1.9rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1d1d1f;
+            transition: color 0.3s ease;
+        }
+
+        .goal-box:hover .goal-title {
+            color: #0071e3;
+        }
+
+        .grid {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .item {
+            background: #fafafa;
+            padding: 22px;
+            width: 320px;
+            border-radius: 18px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .item:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
+            background: linear-gradient(145deg, #ffffff, #f3f4f6);
+        }
+
+        .item-title {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: #000;
+            transition: color 0.3s ease;
+        }
+
+        .item:hover .item-title {
+            color: #0071e3;
+        }
+
+        .item-authors,
+        .item-snippet {
+            font-size: 0.95rem;
+            color: #515154;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .item a {
+            display: inline-block;
+            text-decoration: none;
+            font-weight: 500;
+            color: #0071e3;
+            padding: 8px 14px;
+            border-radius: 10px;
+            border: 1px solid #0071e3;
+            transition: all 0.3s ease;
+        }
+
+        .item a:hover {
+            background: #0071e3;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+    <h1>Study Materials</h1>
+    <div class="contain" id="content"></div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            try {
+                const url = "{{ url_for('main.get_data') }}"; // dynamically generate URL
+                const res = await fetch(url);
+                const data = await res.json();
+
+                const contain = document.getElementById('content');
+                contain.innerHTML = "";
+
+                data.forEach(entry => {
+                    const box = document.createElement('div');
+                    box.className = 'goal-box';
+
+                    const title = document.createElement('div');
+                    title.className = 'goal-title';
+                    box.appendChild(title);
+
+                    const grid = document.createElement('div');
+                    grid.className = 'grid';
+
+                    entry.ebooks.forEach(ebook => {
+                        const item = document.createElement('div');
+                        item.className = 'item';
+                        item.innerHTML = `
+                            <div class="item-title">${ebook.title}</div>
+                            <div class="item-authors">${ebook.authors.join(', ')}</div>
+                            <a href="${ebook.link}" target="_blank">View Ebook</a>
+                        `;
+                        grid.appendChild(item);
+                    });
+
+                    entry.courses.forEach(course => {
+                        const item = document.createElement('div');
+                        item.className = 'item';
+                        item.innerHTML = `
+                            <div class="item-title">${course.title}</div>
+                            <div class="item-snippet">${course.snippet}</div>
+                            <a href="${course.link}" target="_blank">View Course</a>
+                        `;
+                        grid.appendChild(item);
+                    });
+
+                    box.appendChild(grid);
+                    contain.appendChild(box);
+                });
+            } catch (err) {
+                document.getElementById('content').innerHTML = "<p>Failed to load data.</p>";
+                console.error(err);
+            }
+        });
+    </script>
+{% endblock %}

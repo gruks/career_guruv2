@@ -1,0 +1,187 @@
+{% extends "layout.html" %}
+{% block content %}
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: white;
+    min-height: 100vh;
+  }
+
+  .content-section {
+    background: #f8f9fa;
+    color: #333;
+    padding: 4rem 0;
+    min-height: 60vh;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 3rem;
+  }
+
+  /* College Cards */
+  .college-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-left: 5px solid #007bff;
+  }
+
+  .college-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  }
+
+  .college-name {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+
+  .college-location {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .info-item {
+    margin: 0.3rem 0;
+    font-size: 0.95rem;
+  }
+
+  .info-item i {
+    color: #007bff;
+    margin-right: 8px;
+  }
+
+  main.container {
+    margin-top: 0px;
+    padding-top: 20px;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .college-card {
+    animation: fadeInUp 0.6s ease forwards;
+  }
+</style>
+
+<section class="content-section">
+  <div class="container">
+    <h2 class="section-title">Recommended Colleges</h2>
+    <p class="section-subtitle">
+      Based on your profile, here are some colleges you may want to explore.
+    </p>
+
+    <!-- Colleges Grid -->
+    <div id="collegesGrid" class="row">
+      <!-- Cards will be dynamically generated here -->
+    </div>
+
+    <div id="errorMessage" style="color: red; display: none"></div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function showError(msg) {
+    const errorMessage = document.getElementById("errorMessage");
+    errorMessage.innerText = msg;
+    errorMessage.style.display = "block";
+  }
+
+  function createCollegeCard(college) {
+    return `
+      <div class="col-md-6 col-lg-4">
+        <div class="college-card">
+          <div class="college-name">
+            <i class="fas fa-university me-2"></i> ${college.name}
+          </div>
+
+          <div class="info-item">
+            <i class="fas fa-paint-brush"></i>
+            <strong>Programs:</strong> ${college.arts_programs.join(", ")}
+          </div>
+
+          <div class="info-item">
+            <i class="fas fa-briefcase"></i>
+            <strong>Career:</strong> ${college.career_advancement || college.career_advance || "N/A"}
+          </div>
+
+          <div class="info-item">
+            <i class="fas fa-users"></i>
+            <strong>Culture:</strong> ${college.culture}
+          </div>
+
+          <div class="info-item">
+            <i class="fas fa-lightbulb"></i>
+            <strong>Creativity:</strong> ${college.creativity}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    try {
+      // Fetch college.json
+      const res = await fetch("{{ url_for('static', filename='college.json') }}?t=" + Date.now());
+      if (!res.ok) throw new Error(`Failed to load college.json: ${res.status}`);
+      const data = await res.json();
+
+      // Ensure we have colleges
+      const colleges = data.colleges || [];
+      const grid = document.getElementById("collegesGrid");
+
+      if (!Array.isArray(colleges) || colleges.length === 0) {
+        showError("No recommended colleges found.");
+        return;
+      }
+
+      // Build HTML
+      let html = "";
+      colleges.forEach((college) => {
+        html += createCollegeCard(college);
+      });
+      grid.innerHTML = html;
+
+    } catch (err) {
+      console.error(err);
+      showError("Error loading recommended colleges: " + err.message);
+    }
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Groq AI Frontend</title>
+</head>
+<body>
+  <h1>Ask Groq AI</h1>
+  
+  <form id="promptForm">
+    <input type="text" id="prompt" placeholder="Type your question..." size="50" required>
+    <button type="submit">Ask</button>
+  </form>
+
+  <h2>Answer:</h2>
+  <pre id="answer"></pre>
+
+  <script>
+    document.getElementById("promptForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const prompt = document.getElementById("prompt").value;
+
+      const res = await fetch("/api/groq", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
+
+      const data = await res.json();
+      document.getElementById("answer").innerText = data.answer || data.error;
+    });
+  </script>
+</body>
+</html>

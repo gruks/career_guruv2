@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Career Platform - Welcome Aboard!</title>
+
+    <!-- Flatpickr for nicer calendar UI -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+          sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        max-width: 800px;
+        width: 90%;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .progress-bar {
+        height: 4px;
+        background: #e5e7eb;
+        position: relative;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: #1f2937;
+        transition: width 0.3s ease;
+      }
+
+      .slide {
+        display: none;
+        padding: 60px 40px;
+        text-align: center;
+        min-height: 600px;
+      }
+
+      .slide.active {
+        display: block;
+      }
+
+      .slide h1 {
+        font-size: 2.5rem;
+        color: #1f2937;
+        margin-bottom: 15px;
+        font-weight: 300;
+      }
+
+      .slide h2 {
+        font-size: 2rem;
+        color: #1f2937;
+        margin-bottom: 20px;
+        font-weight: 400;
+      }
+
+      .subtitle {
+        color: #6b7280;
+        font-size: 1.1rem;
+        margin-bottom: 40px;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin: 60px 0;
+      }
+
+      .feature {
+        padding: 30px 20px;
+        border: 1px solid #e5e7eb;
+        border-radius: 15px;
+        background: white;
+      }
+
+      .feature h3 {
+        font-size: 1.3rem;
+        color: #1f2937;
+        margin-bottom: 10px;
+        font-weight: 500;
+      }
+
+      .feature p {
+        color: #6b7280;
+        font-size: 0.95rem;
+      }
+
+      .form-group {
+        margin-bottom: 30px;
+        text-align: left;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 1.1rem;
+        color: #1f2937;
+        margin-bottom: 10px;
+        font-weight: 500;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+        background: white;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #1f2937;
+      }
+
+      .error-text {
+        color: #dc2626;
+        font-size: 0.9rem;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .role-grid,
+      .interest-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin: 40px 0;
+      }
+
+      .role-option,
+      .interest-option {
+        padding: 30px 20px;
+        border: 2px solid #e5e7eb;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: white;
+        position: relative;
+      }
+
+      .role-option:hover,
+      .interest-option:hover {
+        border-color: #6b7280;
+        transform: translateY(-2px);
+      }
+
+      .role-option.selected,
+      .interest-option.selected {
+        border-color: #1f2937;
+        background: #f9fafb;
+      }
+
+      .role-option.selected::after,
+      .interest-option.selected::after {
+        content: "Selected";
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: #1f2937;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+      }
+
+      .role-option h3,
+      .interest-option h3 {
+        font-size: 1.3rem;
+        color: #1f2937;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .role-option p,
+      .interest-option p {
+        color: #6b7280;
+        font-size: 0.95rem;
+      }
+
+      .btn {
+        background: #1f2937;
+        color: white;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 40px;
+        box-shadow: 0 4px 10px rgba(31, 41, 55, 0.2);
+      }
+
+      .btn:hover {
+        background: #374151;
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 6px 16px rgba(31, 41, 55, 0.3);
+      }
+
+      .btn:disabled {
+        background: #9ca3af;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .btn-back {
+        background: transparent;
+        color: #6b7280;
+        border: 2px solid #e5e7eb;
+        padding: 10px 20px;
+        margin-right: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-back:hover {
+        background: #f9fafb;
+        border-color: #9ca3af;
+        color: #374151;
+        transform: scale(1.05);
+      }
+
+      .profile-summary {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 15px;
+        padding: 30px;
+        margin: 30px 0;
+        text-align: left;
+      }
+
+      .profile-summary h3 {
+        font-size: 1.3rem;
+        color: #1f2937;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .profile-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      .profile-item:last-child {
+        border-bottom: none;
+      }
+
+      .profile-item strong {
+        color: #1f2937;
+      }
+
+      .profile-item span {
+        color: #6b7280;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          width: 95%;
+          margin: 10px;
+        }
+
+        .slide {
+          padding: 40px 20px;
+        }
+
+        .features,
+        .role-grid,
+        .interest-grid,
+        .next-steps {
+          grid-template-columns: 1fr;
+        }
+
+        .slide h1 {
+          font-size: 2rem;
+        }
+
+        .slide h2 {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress"></div>
+      </div>
+
+      <!-- Slide 1: Name -->
+      <div class="slide active">
+        <h1>Welcome Aboard!</h1>
+        <p class="subtitle">Let's get you started on your career journey</p>
+
+        <h2>Welcome to Our Platform</h2>
+        <p class="subtitle">
+          We're excited to have you here! This quick setup will help us
+          personalize your experience and get you started on the right path.
+        </p>
+
+        <div class="form-group">
+          <label for="name">What's your name?</label>
+          <input type="text" id="name" placeholder="Enter your full name" />
+          <span id="nameError" class="error-text">Please enter only letters and spaces</span>
+        </div>
+
+        <button class="btn" onclick="nextSlide()" id="nameBtn" disabled>
+          Continue
+        </button>
+      </div>
+
+      <!-- Slide 2: DOB + Study Location -->
+      <div class="slide">
+        <button class="btn-back" onclick="prevSlide()">← Back</button>
+
+        <h2>Tell Us About Yourself</h2>
+        <p class="subtitle">Let's start with the basics</p>
+
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <!-- original input (flatpickr will create an altInput visible to the user) -->
+          <input type="text" id="dob" placeholder="DD/MM/YYYY" maxlength="10" />
+        </div>
+
+        <div class="form-group">
+          <label for="study-location">Where do you want to study?</label>
+          <input
+            list="study-locations"
+            id="study-location"
+            placeholder="Type or select a location in India"
+          />
+
+          <datalist id="study-locations">
+            <option value="Bangalore"></option>
+            <option value="Delhi"></option>
+            <option value="Mumbai"></option>
+            <option value="Pune"></option>
+            <option value="Hyderabad"></option>
+            <option value="Chennai"></option>
+            <option value="Kolkata"></option>
+            <option value="Ahmedabad"></option>
+            <option value="Jaipur"></option>
+            <option value="Lucknow"></option>
+            <option value="Indore"></option>
+            <option value="Patna"></option>
+            <option value="Chandigarh"></option>
+            <option value="Bhubaneswar"></option>
+          </datalist>
+        </div>
+
+        <button class="btn" onclick="nextSlide()" id="personalInfoBtn" disabled>
+          Continue
+        </button>
+      </div>
+
+      <!-- Slide 3: Current Status (and conditional Current Class) -->
+      <div class="slide">
+        <button class="btn-back" onclick="prevSlide()">← Back</button>
+
+        <h2>What's Your Current Status?</h2>
+        <p class="subtitle">Help us understand your current situation</p>
+
+        <div class="role-grid">
+          <div class="role-option" data-role="student">
+            <h3>Student</h3>
+            <p>Learning and growing</p>
+          </div>
+          <div class="role-option" data-role="professional">
+            <h3>Working Professional</h3>
+            <p>Building amazing career</p>
+          </div>
+          <div class="role-option" data-role="graduate">
+            <h3>Recent Graduate</h3>
+            <p>Ready to start career</p>
+          </div>
+          <div class="role-option" data-role="career-changer">
+            <h3>Career Changer</h3>
+            <p>Exploring new opportunities</p>
+          </div>
+        </div>
+
+        <!-- Current Class shown only if Student selected -->
+        <div class="form-group" id="currentClassGroup" style="display:none; margin-top:20px;">
+          <label for="currentClass">Select Your Current Class</label>
+          <select id="currentClass">
+            <option value="">Select class</option>
+            <option value="10th">10th</option>
+            <option value="12th">12th</option>
+            <option value="dropper">Dropper</option>
+          </select>
+        </div>
+
+        <button class="btn" onclick="nextSlide()" id="roleBtn" disabled>
+          Continue
+        </button>
+      </div>
+
+      <!-- Slide 4: Interests, Stream, Goal -->
+      <div class="slide">
+        <button class="btn-back" onclick="prevSlide()">← Back</button>
+
+        <h2>What Interests You?</h2>
+        <p class="subtitle">
+          Select all that apply to customize your experience
+        </p>
+
+        <div class="interest-grid">
+          <div class="interest-option" data-interest="technology">
+            <h3>Technology</h3>
+            <p>Software, AI, Innovation</p>
+          </div>
+          <div class="interest-option" data-interest="business">
+            <h3>Business</h3>
+            <p>Management, Strategy, Finance</p>
+          </div>
+          <div class="interest-option" data-interest="creative">
+            <h3>Creative Arts</h3>
+            <p>Design, Media, Content</p>
+          </div>
+          <div class="interest-option" data-interest="healthcare">
+            <h3>Healthcare</h3>
+            <p>Medicine, Research, Wellness</p>
+          </div>
+          <div class="interest-option" data-interest="education">
+            <h3>Education</h3>
+            <p>Teaching, Training, Development</p>
+          </div>
+          <div class="interest-option" data-interest="engineering">
+            <h3>Engineering</h3>
+            <p>Construction, Manufacturing, Systems</p>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 30px">
+          <label for="stream">What is your current or desired stream?</label>
+          <select id="stream">
+            <option value="">Select your stream</option>
+            <option value="science">Science (PCM/PCB)</option>
+            <option value="commerce">Commerce</option>
+            <option value="arts">Arts/Humanities</option>
+            <option value="vocational">Vocational/Technical</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="goal">What's your primary career goal?</label>
+          <select id="goal">
+            <option value="">Select your main goal</option>
+            <option value="skill-development">Develop new skills</option>
+            <option value="career-advancement">Advance in current field</option>
+            <option value="career-change">Change career completely</option>
+            <option value="entrepreneurship">Start my own business</option>
+            <option value="work-life-balance">Better work-life balance</option>
+            <option value="higher-salary">Increase earning potential</option>
+          </select>
+        </div>
+
+        <p style="color: #6b7280; font-size: 0.9rem; margin-top: 20px">
+          You can change these preferences anytime in your settings
+        </p>
+
+        <button class="btn" onclick="nextSlide()" id="interestBtn" disabled>
+          Continue
+        </button>
+      </div>
+
+      <!-- Slide 5: Summary -->
+      <div class="slide">
+        <h2>Congratulations!</h2>
+        <p class="subtitle">
+          Your onboarding is complete and your account is ready.
+        </p>
+
+        <div class="profile-summary">
+          <h3>Your Profile Summary</h3>
+          <div class="profile-item">
+            <strong>Name:</strong>
+            <span id="summaryName"></span>
+          </div>
+          <div class="profile-item">
+            <strong>Age:</strong>
+            <span id="summaryAge"></span>
+          </div>
+          <div class="profile-item">
+            <strong>Study Location:</strong>
+            <span id="summaryStudyLocation"></span>
+          </div>
+          <div class="profile-item">
+            <strong>Status:</strong>
+            <span id="summaryRole"></span>
+          </div>
+          <div class="profile-item">
+            <strong>Current Class:</strong>
+            <span id="summaryClass"></span>
+          </div>
+          <div class="profile-item">
+            <strong>Interests:</strong>
+            <span id="summaryInterests"></span>
+          </div>
+          <div class="profile-item">
+            <strong>Stream:</strong>
+            <span id="summaryStream"></span>
+          </div>
+          <div class="profile-item">
+            <strong>Goal:</strong>
+            <span id="summaryGoal"></span>
+          </div>
+        </div>
+
+        <button class="btn" onclick="finish()">Get Started</button>
+      </div>
+    </div>
+
+    <!-- Flatpickr script -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+      /* ------------------------
+         Variables & state
+         ------------------------ */
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".slide");
+      const totalSlides = slides.length;
+      let selectedRole = "";
+      let selectedInterests = [];
+      let selectedClass = "";
+
+      /* ------------------------
+         Progress & slide control
+         ------------------------ */
+      function updateProgress() {
+        const progress = ((currentSlide + 1) / totalSlides) * 100;
+        document.getElementById("progress").style.width = progress + "%";
+      }
+
+      function showSlide(n) {
+        slides.forEach((s) => s.classList.remove("active"));
+        slides[n].classList.add("active");
+        updateProgress();
+
+        // update enable/disable for active slide's main button where needed
+        if (n === 0) {
+          document.getElementById("nameBtn").disabled =
+            !document.getElementById("name").value.trim() ||
+            !isValidName(document.getElementById("name").value.trim());
+        }
+      }
+
+      function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+          if (validateCurrentSlide()) {
+            currentSlide++;
+            showSlide(currentSlide);
+            if (currentSlide === totalSlides - 1) {
+              generateSummary();
+            }
+          }
+        }
+      }
+
+      function prevSlide() {
+        if (currentSlide > 0) {
+          currentSlide--;
+          showSlide(currentSlide);
+        }
+      }
+
+      /* ------------------------
+         Validation per slide
+         ------------------------ */
+      function validateCurrentSlide() {
+        switch (currentSlide) {
+          case 0: // name
+            return isValidName(document.getElementById("name").value.trim());
+          case 1: // dob + study-location
+            return (
+              document.getElementById("dob").value.trim() !== "" &&
+              document.getElementById("study-location").value.trim() !== ""
+            );
+          case 2: // role + conditional class
+            if (!selectedRole) {
+              alert("Please select your current status");
+              return false;
+            }
+            if (selectedRole === "student") {
+              const cls = document.getElementById("currentClass").value;
+              if (!cls) {
+                alert("Please select your current class");
+                return false;
+              }
+            }
+            return true;
+          case 3: // interests, stream, goal
+            const goal = document.getElementById("goal").value;
+            const stream = document.getElementById("stream").value;
+            if (selectedInterests.length === 0 || !goal || !stream) {
+              alert(
+                "Please select at least one interest, your stream, and your career goal"
+              );
+              return false;
+            }
+            return true;
+          default:
+            return true;
+        }
+      }
+
+      /* ------------------------
+         Personal info (name validation + Enter to continue)
+         ------------------------ */
+
+      const nameInput = document.getElementById("name");
+      const nameBtn = document.getElementById("nameBtn");
+      const nameError = document.getElementById("nameError");
+
+      function isValidName(name) {
+        // only letters and spaces allowed (at least one letter)
+        return /^[A-Za-z\s]+$/.test(name) && /[A-Za-z]/.test(name);
+      }
+
+      nameInput.addEventListener("input", () => {
+        const value = nameInput.value.trim();
+        if (value === "") {
+          nameError.style.display = "none";
+          nameBtn.disabled = true;
+        } else if (!isValidName(value)) {
+          nameError.style.display = "block";
+          nameBtn.disabled = true;
+        } else {
+          nameError.style.display = "none";
+          nameBtn.disabled = false;
+        }
+      });
+
+      nameInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !nameBtn.disabled) {
+          e.preventDefault();
+          nextSlide();
+        }
+      });
+
+      /* ------------------------
+         DOB input mask + Flatpickr (DD/MM/YYYY visible, underlying value Y-m-d)
+         ------------------------ */
+
+      // Initialize flatpickr: underlying input value will be YYYY-MM-DD (dateFormat),
+      // the visible altInput will show DD/MM/YYYY (altFormat).
+      const fpDob = flatpickr("#dob", {
+        dateFormat: "Y-m-d", // underlying value
+        altInput: true,
+        altFormat: "d/m/Y", // visible format
+        maxDate: "today",
+        allowInput: true,
+        onChange: function (selectedDates, dateStr, instance) {
+          // dateStr is the underlying value (Y-m-d). Enable/disable button according to validation.
+          validatePersonalInfo();
+        },
+      });
+
+      // altInput is the visible field shown to the user
+      const dobAltInput = fpDob.altInput;
+      dobAltInput.setAttribute("placeholder", "DD/MM/YYYY");
+      dobAltInput.setAttribute("maxlength", "10");
+
+      // Helper to validate a real date (day, month, year) and ensure not in future
+      function isValidDateDMY(d, m, y) {
+        if (y < 1900 || y > new Date().getFullYear()) return false;
+        if (m < 1 || m > 12) return false;
+        const daysInMonth = new Date(y, m, 0).getDate(); // day 0 gives last day of previous month
+        if (d < 1 || d > daysInMonth) return false;
+        // not in future
+        const dt = new Date(y, m - 1, d);
+        return dt <= new Date();
+      }
+
+      let isProgrammaticAltUpdate = false;
+
+      dobAltInput.addEventListener("input", function (e) {
+        if (isProgrammaticAltUpdate) return;
+        const raw = dobAltInput.value;
+        // keep digits only
+        let digits = raw.replace(/\D/g, "").slice(0, 8);
+        let masked = "";
+        if (digits.length <= 2) {
+          masked = digits;
+        } else if (digits.length <= 4) {
+          masked = digits.slice(0, 2) + "/" + digits.slice(2);
+        } else {
+          masked =
+            digits.slice(0, 2) +
+            "/" +
+            digits.slice(2, 4) +
+            "/" +
+            digits.slice(4, 8);
+        }
+
+        // apply masked value programmatically (prevents caret jump issues when typing)
+        isProgrammaticAltUpdate = true;
+        dobAltInput.value = masked;
+        isProgrammaticAltUpdate = false;
+
+        // If user has typed a full 8 digits -> attempt to set flatpickr's date (so underlying input gets Y-m-d)
+        if (digits.length === 8) {
+          const day = parseInt(digits.slice(0, 2), 10);
+          const month = parseInt(digits.slice(2, 4), 10);
+          const year = parseInt(digits.slice(4, 8), 10);
+
+          if (isValidDateDMY(day, month, year)) {
+            // set date in fp using visible format so original input gets YYYY-MM-DD
+            fpDob.setDate(
+            `${String(day).padStart(2, "0")}/${String(month).padStart(2, "0")}/${String(year)}`,
+              true,       // triggerChange (optional, usually true to update input/trigger events)
+            "d/m/Y"     // format
+            );
+          } else {
+            // invalid date typed: clear underlying value so validation fails until corrected
+            document.getElementById("dob").value = "";
+          }
+        } else {
+          // incomplete date typed: clear underlying input to prevent stale valid value remaining
+          document.getElementById("dob").value = "";
+        }
+
+        validatePersonalInfo();
+      });
+
+      // Allow Enter in the visible DOB field to continue (if allowed)
+      dobAltInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          // attempt to finalize typed date if possible
+          const digits = dobAltInput.value.replace(/\D/g, "");
+          if (digits.length === 8) {
+            // If underlying value is set and personal button enabled, move next
+            if (!document.getElementById("personalInfoBtn").disabled) {
+              nextSlide();
+            }
+            return;
+          }
+          // otherwise do nothing (user hasn't completed dob)
+        }
+      });
+
+      /* ------------------------
+         Personal info validation (study location + dob)
+         ------------------------ */
+      const dobHidden = document.getElementById("dob"); // underlying input (Y-m-d when valid)
+      const studyInput = document.getElementById("study-location");
+      const personalBtn = document.getElementById("personalInfoBtn");
+
+      function validatePersonalInfo() {
+        // we require the underlying input (dobHidden) to have a value (set by flatpickr when date is valid)
+        personalBtn.disabled =
+          dobHidden.value.trim() === "" || studyInput.value.trim() === "";
+      }
+
+      // study-location input handling
+      studyInput.addEventListener("input", validatePersonalInfo);
+      studyInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !personalBtn.disabled) {
+          e.preventDefault();
+          nextSlide();
+        }
+      });
+
+      /* ------------------------
+         Role selection + conditional Current Class
+         ------------------------ */
+      document.querySelectorAll(".role-option").forEach((option) => {
+        option.addEventListener("click", function () {
+          document
+            .querySelectorAll(".role-option")
+            .forEach((opt) => opt.classList.remove("selected"));
+          this.classList.add("selected");
+          selectedRole = this.dataset.role;
+          // show/hide currentClassGroup
+          if (selectedRole === "student") {
+            document.getElementById("currentClassGroup").style.display = "block";
+          } else {
+            document.getElementById("currentClassGroup").style.display = "none";
+            document.getElementById("currentClass").value = "";
+            selectedClass = "";
+          }
+          document.getElementById("roleBtn").disabled = false; // enable but validation will enforce class when next
+        });
+      });
+
+      // currentClass change
+      document.getElementById("currentClass").addEventListener("change", function () {
+        selectedClass = this.value;
+      });
+
+      // Allow Enter on role slide to continue if role selected
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" && currentSlide === 2) {
+          if (!document.getElementById("roleBtn").disabled) {
+            e.preventDefault();
+            nextSlide();
+          }
+        }
+      });
+
+      /* ------------------------
+         Interest selection + stream + goal
+         ------------------------ */
+      document.querySelectorAll(".interest-option").forEach((option) => {
+        option.addEventListener("click", function () {
+          const interest = this.dataset.interest;
+          if (this.classList.contains("selected")) {
+            this.classList.remove("selected");
+            selectedInterests = selectedInterests.filter((i) => i !== interest);
+          } else {
+            this.classList.add("selected");
+            selectedInterests.push(interest);
+          }
+          checkInterestSelection();
+        });
+      });
+
+      document.getElementById("goal").addEventListener("change", checkInterestSelection);
+      document.getElementById("stream").addEventListener("change", checkInterestSelection);
+
+      function checkInterestSelection() {
+        const goal = document.getElementById("goal").value;
+        const stream = document.getElementById("stream").value;
+        document.getElementById("interestBtn").disabled = !(
+          selectedInterests.length > 0 && goal && stream
+        );
+      }
+
+      // Enter on interest slide
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" && currentSlide === 3) {
+          if (!document.getElementById("interestBtn").disabled) {
+            e.preventDefault();
+            nextSlide();
+          }
+        }
+      });
+
+      /* ------------------------
+         Summary generation
+         ------------------------ */
+      function calculateAgeFromDOB(dobValue) {
+        if (!dobValue) return "";
+        // dobValue expected to be "YYYY-MM-DD"
+        const today = new Date();
+        const parts = dobValue.split("-");
+        if (parts.length !== 3) return "";
+        const birthDate = new Date(parts[0], parts[1] - 1, parts[2]);
+        if (isNaN(birthDate)) return "";
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        return age;
+      }
+
+      function generateSummary() {
+        // Fill profile summary
+        document.getElementById("summaryName").textContent =
+          document.getElementById("name").value.trim();
+
+        const dobVal = document.getElementById("dob").value.trim(); // underlying value: YYYY-MM-DD
+        const age = calculateAgeFromDOB(dobVal);
+        document.getElementById("summaryAge").textContent = age !== "" ? age : "";
+
+        document.getElementById("summaryStudyLocation").textContent =
+          document.getElementById("study-location").value.trim();
+
+        document.getElementById("summaryRole").textContent = selectedRole
+          ? selectedRole.replace("-", " ").replace(/\b\w/g, (l) => l.toUpperCase())
+          : "";
+
+        document.getElementById("summaryClass").textContent =
+          selectedRole === "student" ? (document.getElementById("currentClass").value || "") : "";
+
+        document.getElementById("summaryInterests").textContent =
+          selectedInterests
+            .map((i) => i.replace("-", " ").replace(/\b\w/g, (l) => l.toUpperCase()))
+            .join(", ");
+
+        document.getElementById("summaryStream").textContent = document
+          .getElementById("stream")
+          .value.replace(/\b\w/g, (l) => l.toUpperCase());
+
+        document.getElementById("summaryGoal").textContent = document
+          .getElementById("goal")
+          .value.replace("-", " ")
+          .replace(/\b\w/g, (l) => l.toUpperCase());
+      }
+
+      /* ------------------------
+         Finish (POST to /save_profile)
+         ------------------------ */
+      function finish() {
+        const dobVal = document.getElementById("dob").value.trim();
+        const age = calculateAgeFromDOB(dobVal);
+        const userProfile = {
+          name: document.getElementById("name").value.trim(),
+          age: age ? parseInt(age) : null,
+          dob: dobVal || null,
+          studyLocation: document.getElementById("study-location").value.trim(),
+          role: selectedRole,
+          currentClass: selectedRole === "student" ? document.getElementById("currentClass").value : "",
+          interests: selectedInterests,
+          stream: document.getElementById("stream").value,
+          goal: document.getElementById("goal").value,
+          timestamp: new Date().toISOString(),
+        };
+
+        console.log("Sending profile data:", userProfile);
+
+        fetch("/save_profile", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+          },
+          body: JSON.stringify(userProfile),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("HTTP error! status: " + response.status);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("Response data:", data);
+            if (data.status === "success") {
+              window.location.href = "/home";
+            } else {
+              alert("Error: " + (data.message || data.error || "Unknown error"));
+            }
+          })
+          .catch((err) => {
+            console.error("Error saving profile:", err);
+            alert("Failed to save profile to server. (Check console.)");
+          });
+      }
+
+      /* ------------------------
+         Init
+         ------------------------ */
+      validatePersonalInfo();
+      updateProgress();
+      showSlide(0);
+    </script>
+  </body>
+</html>

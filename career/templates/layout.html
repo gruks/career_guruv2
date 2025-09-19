@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.svg') }}">
+    <style>
+      :root {
+        --primary-gradient: linear-gradient(135deg, #000000 0%, #333333 100%);
+        --accent-color: #595d68d5;
+        --text-dark: #2d3436;
+        --text-light: #636e72;
+        --border-light: rgba(255, 255, 255, 0.1);
+        --shadow-soft: 0 8px 32px rgba(31, 38, 135, 0.37);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      img,
+      iframe,
+      video {
+        max-width: 100%;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 1030;
+      }
+
+      .navbar-custom {
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border-light);
+        box-shadow: var(--shadow-soft);
+        transition: all 0.3s ease;
+        padding: 0.5rem 0;
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--text-dark) !important;
+        display: flex;
+        align-items: center;
+        transition: transform 0.3s ease;
+      }
+
+      .navbar-brand:hover {
+        transform: scale(1.05);
+        color: var(--accent-color) !important;
+      }
+
+      .brand-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--primary-gradient);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        color: white;
+        font-size: 18px;
+      }
+
+      .navbar-nav .nav-link {
+        color: var(--text-dark) !important;
+        font-weight: 500;
+        padding: 0.5rem 1rem !important;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .navbar-nav .nav-link:hover {
+        background: rgba(102, 126, 234, 0.1);
+        color: var(--accent-color) !important;
+        transform: translateY(-2px);
+      }
+
+      .navbar-nav .nav-link.active {
+        background: var(--primary-gradient);
+        color: white !important;
+      }
+
+      /* Dropdown Enhancements */
+      .dropdown-menu {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        padding: 8px 0;
+        margin-top: 8px;
+        min-width: 200px;
+      }
+
+      .dropdown-item {
+        padding: 12px 20px;
+        transition: all 0.2s ease;
+        font-weight: 500;
+      }
+
+      .dropdown-item:hover {
+        background: rgba(102, 126, 234, 0.1);
+        color: var(--accent-color);
+        padding-left: 25px;
+      }
+
+      .dropdown-divider {
+        margin: 8px 0;
+        opacity: 0.3;
+      }
+
+      /* Courses Dropdown */
+      .courses-dropdown .dropdown-menu {
+        min-width: 250px;
+      }
+
+      .course-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+      }
+
+      .course-item i {
+        width: 20px;
+        margin-right: 12px;
+        color: var(--accent-color);
+      }
+
+      /* Notification Bell */
+      .notification-wrapper {
+        position: relative;
+        margin-right: 15px;
+      }
+
+      .notification-bell {
+        background: none;
+        border: none;
+        font-size: 18px;
+        color: var(--text-dark);
+        padding: 8px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .notification-bell:hover {
+        background: rgba(102, 126, 234, 0.1);
+        color: var(--accent-color);
+        transform: rotate(15deg);
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        background: #ff4757;
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        animation: pulse 2s infinite;
+      }
+
+      /* Footer Section */
+      .footer-section {
+        background-color: #000000;
+        padding: 88px 0 48px;
+        text-align: center;
+        margin-top: 25px;
+      }
+
+      .footer-content {
+        max-width: 734px;
+        margin: 0 auto;
+      }
+
+      .footer-title {
+        font-size: 40px;
+        font-weight: 600;
+        line-height: 1.1;
+        letter-spacing: 0em;
+        color: #ffffff;
+        margin-bottom: 16px;
+      }
+
+      .footer-text {
+        font-size: 19px;
+        font-weight: 400;
+        line-height: 1.42105;
+        letter-spacing: 0.012em;
+        color: #a1a1a6;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+
+        50% {
+          transform: scale(1.1);
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .notification-dropdown {
+        width: 320px;
+        max-height: 400px;
+        overflow-y: auto;
+      }
+
+      .notification-item {
+        padding: 16px 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: background 0.2s ease;
+      }
+
+      .notification-item:hover {
+        background: rgba(102, 126, 234, 0.05);
+      }
+
+      .notification-item:last-child {
+        border-bottom: none;
+      }
+
+      .notification-title {
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 4px;
+        font-size: 14px;
+      }
+
+      .notification-text {
+        color: var(--text-light);
+        font-size: 12px;
+        line-height: 1.4;
+      }
+
+      /* Profile Image */
+      .profile-image {
+        border: 2px solid var(--accent-color);
+        transition: all 0.3s ease;
+      }
+
+      .profile-image:hover {
+        transform: scale(1.1);
+        border-color: #764ba2;
+      }
+
+      /* Sign Up Button */
+      .signup-btn {
+        background: var(--primary-gradient) !important;
+        color: white !important;
+        border: none;
+        padding: 10px 24px !important;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+
+      .signup-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        color: white !important;
+      }
+
+      /* Mobile Navbar Toggle */
+      .navbar-toggler {
+        border: none;
+        padding: 4px 8px;
+      }
+
+      .navbar-toggler:focus {
+        box-shadow: none;
+      }
+
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      }
+
+      /* Main Content Spacing */
+      main.container {
+        margin-top: 90px;
+        padding-top: 20px;
+      }
+
+      .hero-cta {
+        display: inline-block;
+        background: black;
+        color: #ffffff;
+        padding: 12px 23px;
+        border-radius: 980px;
+        text-decoration: none;
+        font-size: 17px;
+        font-weight: 400;
+        letter-spacing: -0.022em;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .brand-icon {
+          width: 35px;
+          height: 35px;
+          font-size: 16px;
+        }
+
+        .navbar-brand {
+          font-size: 1.3rem;
+        }
+
+        .notification-dropdown {
+          width: 280px;
+        }
+
+        main.container {
+          margin-top: 70px;
+        }
+
+        @media (max-width: 428px) {
+          .page-container {
+            padding: 0 16px;
+          }
+
+          .hero-section {
+            padding: 64px 0;
+          }
+
+          .hero-title {
+            font-size: 32px;
+          }
+
+          .hero-subtitle {
+            font-size: 19px;
+          }
+
+          .section-title {
+            font-size: 32px;
+          }
+
+          .feature-title,
+          .stat-number {
+            font-size: 28px;
+          }
+
+          .feature-description,
+          .stat-label {
+            font-size: 17px;
+          }
+
+          .features-section,
+          .excellence-section,
+          .quality-section,
+          .internship-section,
+          .testimonial-section {
+            padding: 64px 0;
+          }
+
+          .footer-section {
+            padding: 64px 0 32px;
+          }
+
+          .footer-title {
+            font-size: 32px;
+          }
+
+          .footer-text {
+            font-size: 17px;
+          }
+
+          .company-item {
+            width: 140px;
+            height: 80px;
+            padding: 16px;
+          }
+        }
+      }
+    </style>
+    {% if title %}
+    <title>Career Guru - {{ title }}</title>
+    {% else %}
+    <title>Career Guru</title>
+    {% endif %} {% block style %} {% endblock %}
+  </head>
+
+  <body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+          <a class="navbar-brand" href="{{ url_for('main.home') }}">
+            <div class="brand-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            Career Guru
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarToggle"
+            aria-controls="navbarToggle"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav me-auto">
+              <a class="nav-link" href="{{ url_for('main.home') }}">
+                <i class="fas fa-home me-1"></i>Home
+              </a>
+
+              <!-- Courses Dropdown -->
+              <div class="navbar-nav me-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('main.course') }}">
+                    <i class="fas fa-book me-1"></i>Courses
+                  </a>
+                </li>
+              </div>
+
+              <a class="nav-link" href="{{ url_for('main.career') }}">
+                <i class="fas fa-route me-1"></i>Career Path
+              </a>
+              <a class="nav-link" href="{{ url_for('main.college') }}">
+                <i class="fas fa-briefcase me-1"></i>College
+              </a>
+              <a class="nav-link" href="{{ url_for('main.compare') }}">
+                <i class="fas fa-balance-scale me-1"></i>Compare
+              </a>
+              <a class="nav-link" href="{{ url_for('main.prep') }}">
+                <i class="fas fa-pen-alt me-1"></i></i>Prep
+              </a>
+            </div>
+
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav d-flex align-items-center">
+              <!-- Notification Bell -->
+              <div class="notification-wrapper">
+                <div class="dropdown">
+                  <button
+                    class="notification-bell"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                  </button>
+                  <div
+                    class="dropdown-menu dropdown-menu-end notification-dropdown"
+                  >
+                    <div class="notification-item">
+                      <div class="notification-title">New Course Available</div>
+                      <div class="notification-text">
+                        Advanced React Development course is now live
+                      </div>
+                    </div>
+                    <div class="notification-item">
+                      <div class="notification-title">Internship Alert</div>
+                      <div class="notification-text">
+                        5 new internship opportunities in your field
+                      </div>
+                    </div>
+                    <div class="notification-item">
+                      <div class="notification-title">Feature Update</div>
+                      <div class="notification-text">
+                        New AI-powered career recommendations
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {% if current_user.is_authenticated %}
+              <!-- User Profile Dropdown -->
+              <div class="dropdown">
+                <a
+                  href="#"
+                  class="d-block text-decoration-none dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="{{ image_file }}"
+                    alt="Profile"
+                    width="40"
+                    height="40"
+                    class="rounded-circle profile-image"
+                  />
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end text-small">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{{ url_for('users.profile') }}"
+                    >
+                      <i class="fas fa-user me-2"></i>Profile
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      <i class="fas fa-cog me-2"></i>Settings
+                    </a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{{ url_for('users.logout') }}"
+                    >
+                      <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              {% else %}
+              <!-- Sign Up/Login Buttons -->
+              <a class="nav-link me-2" href="{{ url_for('users.login') }}"
+                >Login</a
+              >
+              <a class="signup-btn" href="{{ url_for('users.register') }}"
+                >Sign Up</a
+              >
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main role="main" class="container">
+      <div class="row">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %}
+        <div
+          class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show"
+          role="alert"
+        >
+          {{ message }}
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        {% endfor %} {% endif %} {% endwith %} {% block content %}{% endblock %}
+      </div>
+    </main>
+    <!-- Footer Section -->
+    <section class="footer-section">
+      <div class="page-container">
+        <div class="footer-content">
+          <h2 class="footer-title">Ready to get started?</h2>
+          <p class="footer-text">
+            Join thousands of learners who are already building their dream
+            careers with Career Guru.
+          </p>
+          <a href="#" class="hero-cta" style="margin-top: 32px"
+            >Start Learning Today</a
+          >
+        </div>
+      </div>
+    </section>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+    <!-- Custom JS for enhanced interactions -->
+    <script>
+      // Add active class to current page
+      document.addEventListener("DOMContentLoaded", function () {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+
+        navLinks.forEach((link) => {
+          if (link.getAttribute("href") === currentPath) {
+            link.classList.add("active");
+          }
+        });
+      });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

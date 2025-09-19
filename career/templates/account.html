@@ -1,0 +1,177 @@
+{% extends "layout.html" %} {% block content %}
+<div class="content-section">
+  <div class="row align-items-center mb-4">
+    <div class="col-md-3 text-center">
+      <img
+        class="rounded-circle account-img"
+        src="{{ image_file }}"
+        alt="Profile Picture"
+        width="125"
+        height="125"
+      />
+    </div>
+    <div class="col-md-9">
+      <h2 class="account-heading">{{ current_user.username }}</h2>
+      <p class="text-secondary">{{ current_user.email }}</p>
+    </div>
+  </div>
+
+  <form method="POST" action="" enctype="multipart/form-data" novalidate>
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Account Info</legend>
+
+      <div class="mb-3">
+        {{ form.username.label(class="form-label") }} {% if form.username.errors
+        %} {{ form.username(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.username.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %} {{ form.username(class="form-control form-control-lg") }} {%
+        endif %}
+      </div>
+
+      <div class="mb-3">
+        {{ form.email.label(class="form-label") }} {% if form.email.errors %} {{
+        form.email(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.email.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %} {{ form.email(class="form-control form-control-lg") }} {%
+        endif %}
+      </div>
+
+      <div class="mb-3">
+        {{ form.picture.label(class="form-label") }} {{
+        form.picture(class="form-control") }} {% if form.picture.errors %}
+        <div class="text-danger mt-1">
+          {% for error in form.picture.errors %}
+          <span>{{ error }}</span><br />
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Additional Details</legend>
+
+      <div class="mb-3">
+        {{ form.age.label(class="form-label") }} {{
+        form.age(class="form-control") }} {% if form.age.errors %}
+        <div class="text-danger mt-1">
+          {% for error in form.age.errors %}
+          <span>{{ error }}</span><br />
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="mb-3">
+        {{ form.qualification.label(class="form-label") }} {{
+        form.qualification(class="form-control") }} {% if
+        form.qualification.errors %}
+        <div class="text-danger mt-1">
+          {% for error in form.qualification.errors %}
+          <span>{{ error }}</span><br />
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="mb-3">
+        {{ form.goal.label(class="form-label") }} {{
+        form.goal(class="form-control") }} {% if form.goal.errors %}
+        <div class="text-danger mt-1">
+          {% for error in form.goal.errors %}
+          <span>{{ error }}</span><br />
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="mb-3">
+        {{ form.field_of_interest.label(class="form-label") }} {{
+        form.field_of_interest(class="form-control") }} {% if
+        form.field_of_interest.errors %}
+        <div class="text-danger mt-1">
+          {% for error in form.field_of_interest.errors %}
+          <span>{{ error }}</span><br />
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="mb-3">
+        {{ form.preferred_location.label(class="form-label") }} {{
+        form.preferred_location(class="form-control", id="location-input") }}
+        <div
+          id="location-suggestions"
+          class="list-group position-absolute"
+        ></div>
+
+        {% if form.preferred_location.errors %}
+        <div class="text-danger mt-1">
+          {% for error in form.preferred_location.errors %}
+          <span>{{ error }}</span><br />
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </fieldset>
+
+    <div class="form-group">
+      {{ form.submit(class="btn btn-outline-info d-block mx-auto w-50") }}
+    </div>
+  </form>
+</div>
+{% endblock content %}
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('location-input');
+    const suggestionBox = document.getElementById('location-suggestions');
+
+    input.addEventListener('input', function() {
+        const query = input.value.trim();
+        if (!query) {
+            suggestionBox.innerHTML = '';
+            return;
+        }
+
+        fetch(`https://api.locationiq.com/v1/autocomplete?key=pk.62e188b585626ca82ac5b712d2a320ce&q=${encodeURIComponent(query)}&limit=5&dedupe=1`)
+        .then(response => response.json())
+        .then(data => {
+            suggestionBox.innerHTML = '';
+            if (Array.isArray(data)) {
+                data.forEach(item => {
+                    const div = document.createElement('div');
+                    div.textContent = item.display_name;
+                    div.classList.add('list-group-item', 'list-group-item-action');
+                    div.addEventListener('click', () => {
+                        input.value = item.display_name;
+                        suggestionBox.innerHTML = '';
+                    });
+                    suggestionBox.appendChild(div);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching location:', error);
+            suggestionBox.innerHTML = '';
+        });
+    });
+
+    // Hide suggestions when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!input.contains(e.target) && !suggestionBox.contains(e.target)) {
+            suggestionBox.innerHTML = '';
+        }
+    });
+});
+</script>
+{% endblock %}

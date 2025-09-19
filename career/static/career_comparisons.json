@@ -1,0 +1,406 @@
+[
+  {
+    "user_id": 1,
+    "username": "Ayush",
+    "career1": "B.tech",
+    "career2": "B.Ca",
+    "comparison": {
+      "comparison": {
+        "career1": "B.tech",
+        "career2": "B.Ca",
+        "duration_of_study": {
+          "B.tech": "4 years",
+          "B.Ca": "3 years"
+        },
+        "entrance_exams": {
+          "B.tech": [
+            "JEE Main",
+            "BITSAT"
+          ],
+          "B.Ca": [
+            "NEET",
+            "IPUCET"
+          ]
+        },
+        "skills_required": {
+          "B.tech": [
+            "Problem Solving",
+            "Analytical Skills"
+          ],
+          "B.Ca": [
+            "Communication Skills",
+            "Performing Skills"
+          ]
+        },
+        "common_job_roles": {
+          "B.tech": [
+            "Software Engineer",
+            "Data Analyst"
+          ],
+          "B.Ca": [
+            "Actor",
+            "Dancer"
+          ]
+        },
+        "average_salary_india": {
+          "B.tech": "3-10 lakhs per annum",
+          "B.Ca": "2-8 lakhs per annum"
+        },
+        "higher_education_opportunities": {
+          "B.tech": [
+            "M.Tech",
+            "MBA"
+          ],
+          "B.Ca": [
+            "M.A. in Performance",
+            "Diploma in Direction"
+          ]
+        },
+        "future_scope": {
+          "B.tech": "Good in terms of job prospects and salary",
+          "B.Ca": "Challenging due to intense competition in the entertainment industry"
+        }
+      }
+    }
+  },
+  {
+    "user_id": 1,
+    "username": "Ayush",
+    "career1": "B.tech",
+    "career2": "B.Ca",
+    "comparison": {
+      "comparison": {
+        "career1": "B.tech",
+        "career2": "B.Ca",
+        "duration_of_study": {
+          "B.tech": "4 years",
+          "B.Ca": "3 years"
+        },
+        "entrance_exams": {
+          "B.tech": [
+            "JEE Main",
+            "JEE Advanced",
+            "BITSAT",
+            "KCET"
+          ],
+          "B.Ca": [
+            "NEET",
+            "AIPMT",
+            "AIIMS",
+            "JIPMER"
+          ]
+        },
+        "skills_required": {
+          "B.tech": [
+            "Problem-solving",
+            "Analytical skills",
+            "Communication",
+            "Time management"
+          ],
+          "B.Ca": [
+            "Artistic expression",
+            "Creativity",
+            "Communication",
+            "Teamwork"
+          ]
+        },
+        "common_job_roles": {
+          "B.tech": [
+            "Software engineer",
+            "Data scientist",
+            "IT consultant"
+          ],
+          "B.Ca": [
+            "Graphic artist",
+            "Art director",
+            "Curator"
+          ]
+        },
+        "average_salary_india": {
+          "B.tech": "₹ 4-8 lakhs per year",
+          "B.Ca": "₹ 2-5 lakhs per year"
+        },
+        "higher_education_opportunities": {
+          "B.tech": [
+            "M.tech",
+            "MS",
+            "MBA"
+          ],
+          "B.Ca": [
+            "MA",
+            "MFA",
+            "PG Diploma"
+          ]
+        },
+        "future_scope": {
+          "B.tech": "The job demand for B.tech graduates is high, with increasing opportunities in IT, data science, and emerging technologies.",
+          "B.Ca": "The career scope for B.Ca graduates is expanding in the fields of entertainment, advertising, and design, but requires continuous learning and professional development."
+        }
+      }
+    }
+  },
+  {
+    "user_id": 1,
+    "username": "Ayush",
+    "career1": "M.B.B.S",
+    "career2": "B.Pharm",
+    "comparison": {
+      "comparison": {
+        "career1": "M.B.B.S",
+        "career2": "B.Pharm",
+        "duration_of_study": {
+          "M.B.B.S": "5.5 years",
+          "B.Pharm": "4 years"
+        },
+        "entrance_exams": {
+          "M.B.B.S": [
+            "NEET"
+          ],
+          "B.Pharm": [
+            "NATA",
+            "GUJCET",
+            "CPAT"
+          ]
+        },
+        "skills_required": {
+          "M.B.B.S": [
+            "Communication skills",
+            "Clinical skills",
+            "Analytical skills"
+          ],
+          "B.Pharm": [
+            "Communication skills",
+            "Analytical skills",
+            "Data analysis skills"
+          ]
+        },
+        "common_job_roles": {
+          "M.B.B.S": [
+            "Doctor",
+            "Physician",
+            "Surgeon"
+          ],
+          "B.Pharm": [
+            "Pharmacist",
+            "Clinical research associate",
+            "Medical sales representative"
+          ]
+        },
+        "average_salary_india": {
+          "M.B.B.S": "30L - 80L",
+          "B.Pharm": "6L - 15L"
+        },
+        "higher_education_opportunities": {
+          "M.B.B.S": [
+            "Postgraduate degree (MD/MS)",
+            "Diploma in Medical specialties"
+          ],
+          "B.Pharm": [
+            "M.Pharm",
+            "Ph.D. in Pharmacy"
+          ]
+        },
+        "future_scope": {
+          "M.B.B.S": "Growing demand for healthcare professionals, increasing opportunities in medical research, academia, and administration",
+          "B.Pharm": "Growing demand for pharmacy professionals in the pharmaceutical industry, government sector, and healthcare"
+        }
+      }
+    }
+  },
+  {
+    "user_id": 1,
+    "username": "Ayush",
+    "career1": "M.B.B.S",
+    "career2": "B.Pharm",
+    "comparison": {
+      "comparison": {
+        "career1": "M.B.B.S",
+        "career2": "B.Pharm",
+        "duration_of_study": {
+          "M.B.B.S": 5.5,
+          "B.Pharm": 4
+        },
+        "entrance_exams": {
+          "M.B.B.S": [
+            "NEET-UG",
+            "COMED-K"
+          ],
+          "B.Pharm": [
+            "NEET-UG",
+            "GPAT"
+          ]
+        },
+        "skills_required": {
+          "M.B.B.S": [
+            "Communication",
+            "Problem-solving"
+          ],
+          "B.Pharm": [
+            "Analytical skills",
+            "Communication"
+          ]
+        },
+        "common_job_roles": {
+          "M.B.B.S": [
+            "Physician",
+            "Surgeon"
+          ],
+          "B.Pharm": [
+            "Research Scientist",
+            "Pharmacist"
+          ]
+        },
+        "average_salary_india": {
+          "M.B.B.S": "20 lakhs - 80 lakhs",
+          "B.Pharm": "5 lakhs - 20 lakhs"
+        },
+        "higher_education_opportunities": {
+          "M.B.B.S": [
+            "MD/MS",
+            "DM/MCh"
+          ],
+          "B.Pharm": [
+            "M.Pharm",
+            "Ph.D."
+          ]
+        },
+        "future_scope": {
+          "M.B.B.S": "Constant demand in healthcare services, opportunities in research and teaching",
+          "B.Pharm": "Growing demand in pharmacy and related industries, opportunities in research and development"
+        }
+      }
+    }
+  },
+  {
+    "user_id": 1,
+    "username": "Ayush",
+    "career1": "B.tech",
+    "career2": "B.Pharm",
+    "comparison": {
+      "comparison": {
+        "career1": "B.tech",
+        "career2": "B.Pharm",
+        "duration_of_study": {
+          "B.tech": "4 years",
+          "B.Pharm": "4 years"
+        },
+        "entrance_exams": {
+          "B.tech": [
+            "JEE Main",
+            "BITSAT",
+            "VITEEE"
+          ],
+          "B.Pharm": [
+            "GCET",
+            "PGET",
+            "UPSEE"
+          ]
+        },
+        "skills_required": {
+          "B.tech": [
+            "Mathematics and science skills",
+            "Problem-solving skills",
+            "Data analysis skills"
+          ],
+          "B.Pharm": [
+            "Chemistry and pharmacy knowledge",
+            "Lab skills",
+            "Communication skills"
+          ]
+        },
+        "common_job_roles": {
+          "B.tech": [
+            "Software Engineer",
+            "Research and Development Engineer"
+          ],
+          "B.Pharm": [
+            "Pharmaceutical Research and Development",
+            "Clinical Trials Coordinator"
+          ]
+        },
+        "average_salary_india": {
+          "B.tech": "Rs. 3,00,000 - Rs. 6,00,000 per annum",
+          "B.Pharm": "Rs. 2,50,000 - Rs. 5,00,000 per annum"
+        },
+        "higher_education_opportunities": {
+          "B.tech": [
+            "Master's in Engineering or Management",
+            "Post-Graduate Diploma in Management"
+          ],
+          "B.Pharm": [
+            "Master's in Pharmacy",
+            "MBA in Health Care Management"
+          ]
+        },
+        "future_scope": {
+          "B.tech": "The job market for B.tech graduates is diverse and promising, with opportunities in various industries, including IT, finance, and healthcare.",
+          "B.Pharm": "The pharmaceutical industry is growing rapidly, and B.Pharm graduates can pursue careers in research and development, quality control, and regulatory affairs."
+        }
+      }
+    }
+  },
+  {
+    "user_id": 1,
+    "username": "Ayush",
+    "career1": "B.tech",
+    "career2": "B.Pharm",
+    "comparison": {
+      "comparison": {
+        "career1": "B.tech",
+        "career2": "B.Pharm",
+        "duration_of_study": {
+          "B.tech": "4 years",
+          "B.Pharm": "4 years"
+        },
+        "entrance_exams": {
+          "B.tech": [
+            "JEE Main",
+            "BITSAT"
+          ],
+          "B.Pharm": [
+            "NATA",
+            ""
+          ]
+        },
+        "skills_required": {
+          "B.tech": [
+            "Problem-solving",
+            "Programming"
+          ],
+          "B.Pharm": [
+            "Analytical skills",
+            "Laboratory procedures"
+          ]
+        },
+        "common_job_roles": {
+          "B.tech": [
+            "Software engineer",
+            "Data analyst"
+          ],
+          "B.Pharm": [
+            "Quality control manager",
+            "Regulatory affairs"
+          ]
+        },
+        "average_salary_india": {
+          "B.tech": "3.5-8 lakhs",
+          "B.Pharm": "4-8 lakhs"
+        },
+        "higher_education_opportunities": {
+          "B.tech": [
+            "M.Tech",
+            "MBA"
+          ],
+          "B.Pharm": [
+            "M.Pharm",
+            "MBA"
+          ]
+        },
+        "future_scope": {
+          "B.tech": "Excellent job prospects, various industries, and startups",
+          "B.Pharm": "Limited job opportunities, highly competitive market"
+        }
+      }
+    }
+  }
+]

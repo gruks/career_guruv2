@@ -1,0 +1,39 @@
+{
+  "user_id": 1,
+  "username": "Ayush",
+  "colleges": [
+    {
+      "name": "Sandeep Joshi School of Art (SJSA)",
+      "arts_programs": [
+        "Fine Arts",
+        "Commercial Art",
+        "Photography"
+      ],
+      "career_advancement": "Strong connections with Mumbai's art industry and frequent guest lectures",
+      "culture": "Diverse campus with various cultural festivals and events throughout the year",
+      "creativity": "Well-equipped art studios and libraries with resources for creative growth"
+    },
+    {
+      "name": "Sir J.J. School of Art",
+      "arts_programs": [
+        "Applied Art",
+        "Painting and Sculpture",
+        "Print-Making"
+      ],
+      "career_advance": "Established reputation with opportunities for global collaborations and projects",
+      "culture": "Legacy of art education with a strong sense of community and tradition",
+      "creativity": "Comprehensive curriculum covering various art forms and mediums"
+    },
+    {
+      "name": "Abhinav Kala Mahavidyalaya",
+      "arts_programs": [
+        "Fine Arts",
+        "Performing Arts",
+        "Music"
+      ],
+      "career_advancement": "Strong focus on practical skills and professional development",
+      "culture": "Diverse student body and faculty with a dynamic approach to art education",
+      "creativity": "State-of-the-art facilities and resources for creative growth"
+    }
+  ]
+}

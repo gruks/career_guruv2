@@ -1,0 +1,102 @@
+[
+  {
+    "user_id": 1,
+    "username": "Ayush",
+    "career": [
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "businesses"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "Bachelor of Business Administration (BBA)",
+            "Bachelor of Science in Business Administration"
+          ],
+          "relevant_courses": [
+            "Corporate Finance",
+            "Marketing Management",
+            "Operational Management",
+            "Financial Management",
+            "Business Strategy",
+            "Business Statistics"
+          ],
+          "skills": [
+            "data analysis",
+            "problem-solving",
+            "communication",
+            "leadership",
+            "time management"
+          ],
+          "internships_and_experience": [
+            "Finance Intern",
+            "Marketing Coordinator",
+            "Business Development Specialist",
+            "Business Analyst"
+          ],
+          "certifications": [
+            "Certified Associate in Project Management (CAPM)",
+            "Certified Digital Marketing Professional (CDMP)"
+          ],
+          "future_roles": [
+            "Financial Manager",
+            "Marketing Manager",
+            "Operations Manager",
+            "Business Consultant"
+          ]
+        }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "Business Administration",
+            "Management"
+          ],
+          "relevant_courses": [
+            "Principles of Accounting",
+            "Business Statistics",
+            "Organizational Behavior"
+          ],
+          "skills": [
+            "Financial Analysis",
+            "Data Interpretation",
+            "Leadership"
+          ],
+          "internships_and_experience": [
+            "Management Trainee",
+            "Business Analyst Intern"
+          ],
+          "certifications": [
+            "CPA (Certified Public Accountant)",
+            "CBAP (Certified Business Analysis Professional)"
+          ],
+          "future_roles": [
+            "Management Consultant",
+            "Business Development Manager"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "Ayush",
+    "age": 20,
+    "dob": "2005-09-08",
+    "studyLocation": "Hyderabad",
+    "role": "student",
+    "currentClass": "12th",
+    "interests": [
+      "creative",
+      "business"
+    ],
+    "stream": "science",
+    "goal": "skill-development",
+    "timestamp": "2025-09-18T14:20:56.663Z"
+  }
+]

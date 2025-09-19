@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Career Guru - Create Account</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .background-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.05;
+        background-image: radial-gradient(
+            circle at 25% 25%,
+            rgba(255, 255, 255, 0.2) 2px,
+            transparent 2px
+          ),
+          radial-gradient(
+            circle at 75% 75%,
+            rgba(255, 255, 255, 0.2) 2px,
+            transparent 2px
+          );
+        background-size: 50px 50px;
+        z-index: 1;
+      }
+
+      .container {
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        z-index: 2;
+      }
+
+      .left-section {
+        flex: 1;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+      }
+
+      .logo {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #1a202c;
+        letter-spacing: -0.025em;
+      }
+
+      .logo-icon {
+        width: 44px;
+        height: 44px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 12px;
+        margin-right: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+      }
+
+      .logo-icon::before,
+      .logo-icon::after {
+        content: "";
+        position: absolute;
+        background: white;
+        border-radius: 3px;
+      }
+
+      .logo-icon::before {
+        width: 14px;
+        height: 14px;
+        top: 8px;
+        left: 8px;
+      }
+
+      .logo-icon::after {
+        width: 10px;
+        height: 10px;
+        bottom: 8px;
+        right: 8px;
+      }
+
+      .welcome-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #1a202c;
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+        letter-spacing: -0.025em;
+        text-align: left;
+      }
+
+      .welcome-subtitle {
+        font-size: 1.1rem;
+        color: #718096;
+        margin-bottom: 1.3rem;
+        font-weight: 400;
+        text-align: left;
+      }
+
+      .form-content {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      fieldset {
+        border: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .border-bottom {
+        border-bottom: 2px solid #e2e8f0;
+        margin-bottom: 1.5rem !important;
+        padding-bottom: 0.5rem;
+      }
+
+      legend {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #2d3748;
+        padding: 0;
+        text-align: center;
+        width: 100%;
+      }
+
+      .form-group {
+        margin-bottom: 0.5rem;
+        flex: 1;
+      }
+
+      .form-control-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: black;
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.025em;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 0.6rem 0.5rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background: white;
+        color: #2d3748;
+        font-family: inherit;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        transform: translateY(-1px);
+      }
+
+      .form-control-lg {
+        padding: 0.6rem 0.5rem;
+        font-size: 1.05rem;
+      }
+
+      .is-invalid {
+        border-color: #e53e3e;
+        box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+      }
+
+      .invalid-feedback {
+        color: #e53e3e;
+        font-size: 0.875rem;
+        margin-top: 0.5rem;
+        font-weight: 500;
+      }
+
+      .form-check {
+        display: flex;
+        align-items: flex-start;
+        margin: 1rem 0;
+      }
+
+      .form-check-input {
+        width: 18px;
+        height: 18px;
+        margin-right: 0.75rem;
+        margin-top: 0.125rem;
+        accent-color: #667eea;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+
+      .form-check-label {
+        font-size: 0.9rem;
+        color: #718096;
+        cursor: pointer;
+        user-select: none;
+        line-height: 1.4;
+      }
+
+      .form-check-label a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .form-check-label a:hover {
+        color: #764ba2;
+        text-decoration: underline;
+      }
+
+      .btn {
+        padding: 0.6rem 0.5rem;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: none;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        letter-spacing: 0.025em;
+      }
+
+      .btn-outline-info {
+        background: black;
+        color: white;
+        border: 2px solid transparent;
+        width: 100%;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+      }
+
+      .btn-outline-info:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-outline-info:active {
+        transform: translateY(0);
+      }
+
+      .btn-outline-info:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+      }
+
+      .google-btn {
+        width: 100%;
+        background: white;
+        color: #4a5568;
+        border: 2px solid #e2e8f0;
+        padding: 0.6rem 0.5rem;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1.5rem 0;
+        letter-spacing: 0.025em;
+      }
+
+      .google-btn:hover {
+        border-color: #cbd5e0;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        transform: translateY(-1px);
+      }
+
+      .google-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 0.75rem;
+      }
+
+      .text-muted {
+        color: #718096;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+
+      .ml-2 {
+        margin-left: 0.5rem;
+      }
+
+      .border-top {
+        border-top: 1px solid #e2e8f0;
+        padding-top: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .text-muted a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .text-muted a:hover {
+        color: #764ba2;
+        text-decoration: underline;
+      }
+
+      .password-strength {
+        margin-top: 0.5rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+
+      .strength-weak {
+        color: #e53e3e;
+      }
+
+      .strength-medium {
+        color: #f59e0b;
+      }
+
+      .strength-strong {
+        color: #10b981;
+      }
+
+      .right-section {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+          135deg,
+          rgba(102, 126, 234, 0.1) 0%,
+          rgba(118, 75, 162, 0.1) 100%
+        );
+      }
+
+      .illustration {
+        position: relative;
+        max-width: 400px;
+        width: 100%;
+      }
+
+      .person-container {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(25px);
+        border-radius: 24px;
+        padding: 3rem;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+      }
+
+      .person {
+        width: 180px;
+        height: 220px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .person-silhouette {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+        border-radius: 90px 90px 35px 35px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(45, 55, 72, 0.3);
+      }
+
+      .person-face {
+        width: 70px;
+        height: 90px;
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        border-radius: 45px;
+        position: absolute;
+        top: 35px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .person-hair {
+        width: 110px;
+        height: 70px;
+        background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+        border-radius: 55px 55px 0 0;
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .success-hand {
+        position: absolute;
+        right: -15px;
+        top: 75px;
+        width: 55px;
+        height: 55px;
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .floating-elements {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .floating-icon {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 14px;
+        padding: 1rem;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .floating-icon svg {
+        width: 24px;
+        height: 24px;
+        fill: rgba(255, 255, 255, 0.8);
+      }
+
+      /* Enhanced Focus States */
+      .form-control:focus + .form-control-label,
+      .form-control:not(:placeholder-shown) + .form-control-label {
+        color: #667eea;
+      }
+
+      /* Smooth Transitions */
+      .form-group {
+        transition: transform 0.3s ease;
+      }
+
+      .form-group:focus-within {
+        transform: translateY(-2px);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .container {
+          flex-direction: column;
+        }
+
+        .left-section {
+          padding: 2rem;
+          min-height: 70vh;
+        }
+
+        .right-section {
+          min-height: 30vh;
+        }
+
+        .welcome-title {
+          font-size: 2rem;
+        }
+
+        .person-container {
+          padding: 2rem;
+        }
+
+        .person {
+          width: 150px;
+          height: 180px;
+        }
+
+        .form-row {
+          flex-direction: column;
+          gap: 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          overflow-y: auto;
+        }
+
+        .container {
+          min-height: 100vh;
+          height: auto;
+        }
+
+        .left-section {
+          padding: 1.5rem;
+        }
+
+        .welcome-title {
+          font-size: 1.75rem;
+        }
+
+        .logo {
+          margin-bottom: 1.5rem;
+          font-size: 1.25rem;
+        }
+
+        .right-section {
+          min-height: 250px;
+        }
+
+        .form-content {
+          max-width: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-pattern"></div>
+
+    <div class="container">
+      <div class="left-section">
+        <div class="logo">Career Guru</div>
+        <div class="form-content">
+          <h1 class="welcome-title">Create your account</h1>
+          <p class="welcome-subtitle">
+            Start your career journey with us today
+          </p>
+          <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+              <div class="form-group">
+                {{ form.username.label(class="form-control-label") }} {% if
+                form.username.errors %} {{ form.username(class="form-control
+                form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.username.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %} {{ form.username(class="form-control
+                form-control-lg") }} {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.email.label(class="form-control-label") }} {% if
+                form.email.errors %} {{ form.email(class="form-control
+                form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.email.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %} {{ form.email(class="form-control form-control-lg")
+                }} {% endif %}
+              </div>
+
+              <div class="form-group password-wrapper">
+                {{ form.password.label(class="form-control-label") }}
+                <div style="position: relative">
+                  {% if form.password.errors %} {{
+                  form.password(class="form-control form-control-lg is-invalid",
+                  id="password") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %} {{ form.password(class="form-control
+                  form-control-lg", id="password") }} {% endif %}
+                  <button
+                    type="button"
+                    id="togglePassword"
+                    style="
+                      position: absolute;
+                      right: 10px;
+                      top: 50%;
+                      transform: translateY(-50%);
+                      background: none;
+                      border: none;
+                      cursor: pointer;
+                      color: black;
+                      font-size: 1rem;
+                    "
+                  >
+                    <i class="bi bi-eye"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-group password-wrapper">
+                {{ form.confirm_password.label(class="form-control-label") }}
+                <div style="position: relative">
+                  {% if form.confirm_password.errors %} {{
+                  form.confirm_password(class="form-control form-control-lg
+                  is-invalid", id="confirm_password") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.confirm_password.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %} {{ form.confirm_password(class="form-control
+                  form-control-lg", id="confirm_password") }} {% endif %}
+                  <button
+                    type="button"
+                    id="toggleConfirmPassword"
+                    style="
+                      position: absolute;
+                      right: 10px;
+                      top: 50%;
+                      transform: translateY(-50%);
+                      background: none;
+                      border: none;
+                      cursor: pointer;
+                      color: black;
+                      font-size: 1rem;
+                    "
+                  >
+                    <i class="bi bi-eye"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-check">
+                {{ form.terms(class="form-check-input") }}
+                <label for="{{ form.terms.id }}" class="form-check-label">
+                  I agree to the <a href="#">Terms of Service</a> and
+                  <a href="#">Privacy Policy</a>
+                </label>
+              </div>
+
+              {% if form.newsletter %}
+              <div class="form-check">
+                {{ form.newsletter(class="form-check-input") }} {{
+                form.newsletter.label(class="form-check-label") }}
+              </div>
+              {% endif %}
+            </fieldset>
+
+            <div class="form-group">
+              {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+          </form>
+
+          <div class="border-top pt-3">
+            <small class="text-muted">
+              Already have an account?
+              <a class="ml-2" href="{{ url_for('users.login') }}"
+                >Sign in here</a
+              >
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-section">
+        <div class="floating-elements">
+          <div class="floating-icon" style="top: 15%; left: 10%">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 11H7v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-9h-2v9H9v-9z" />
+              <path
+                d="m21 6-1-1h-3.5L15 3.5a1.5 1.5 0 0 0-1.06-.44H10.06A1.5 1.5 0 0 0 9 3.5L7.5 5H4l-1 1v2h18V6z"
+              />
+            </svg>
+          </div>
+          <div class="floating-icon" style="top: 25%; right: 15%">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+          </div>
+          <div class="floating-icon" style="bottom: 25%; left: 15%">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
+              />
+            </svg>
+          </div>
+          <div class="floating-icon" style="bottom: 35%; right: 10%">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <div class="illustration">
+          <div class="person-container">
+            <div class="person">
+              <div class="person-silhouette">
+                <div class="person-hair"></div>
+                <div class="person-face"></div>
+              </div>
+              <div class="success-hand">✨</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Enhanced form interactions
+      document.querySelectorAll(".form-control").forEach((input) => {
+        input.addEventListener("focus", function () {
+          this.parentElement.style.transform = "translateY(-2px)";
+          this.parentElement.style.transition =
+            "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)";
+        });
+
+        input.addEventListener("blur", function () {
+          this.parentElement.style.transform = "translateY(0)";
+        });
+      });
+
+      // Password strength indicator
+      const passwordInput = document.querySelector('input[name="password"]');
+      const strengthIndicator = document.getElementById("passwordStrength");
+
+      if (passwordInput && strengthIndicator) {
+        passwordInput.addEventListener("input", function () {
+          const password = this.value;
+          let strength = 0;
+          let feedback = "";
+
+          if (password.length >= 8) strength++;
+          if (/[A-Z]/.test(password)) strength++;
+          if (/[a-z]/.test(password)) strength++;
+          if (/[0-9]/.test(password)) strength++;
+          if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+          if (password.length === 0) {
+            feedback = "";
+          } else if (strength < 3) {
+            feedback = '<span class="strength-weak">Weak password</span>';
+          } else if (strength < 5) {
+            feedback = '<span class="strength-medium">Medium strength</span>';
+          } else {
+            feedback = '<span class="strength-strong">Strong password</span>';
+          }
+
+          strengthIndicator.innerHTML = feedback;
+        });
+      }
+
+      const togglePassword = document.querySelector("#togglePassword");
+      const password = document.querySelector("#password");
+
+      if (togglePassword && password) {
+        togglePassword.addEventListener("click", function () {
+          const type =
+            password.getAttribute("type") === "password" ? "text" : "password";
+          password.setAttribute("type", type);
+          this.innerHTML = type === "password" ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
+        });
+      }
+
+      const toggleConfirmPassword = document.querySelector(
+        "#toggleConfirmPassword"
+      );
+      const confirmPassword = document.querySelector("#confirm_password");
+
+      if (toggleConfirmPassword && confirmPassword) {
+        toggleConfirmPassword.addEventListener("click", function () {
+          const type =
+            confirmPassword.getAttribute("type") === "password"
+              ? "text"
+              : "password";
+          confirmPassword.setAttribute("type", type);
+          this.innerHTML = type === "password" ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
+        });
+      }
+
+      // Form submission animation
+      document.querySelector("form").addEventListener("submit", function (e) {
+        const submitBtn = document.querySelector(".btn-outline-info");
+        submitBtn.style.transform = "scale(0.98)";
+        setTimeout(() => {
+          submitBtn.style.transform = "scale(1)";
+        }, 150);
+      });
+
+      // Terms checkbox validation
+      const termsCheckbox = document.querySelector('input[name="terms"]');
+      const submitButton = document.querySelector(".btn-outline-info");
+
+      if (termsCheckbox && submitButton) {
+        function updateSubmitButton() {
+          submitButton.disabled = !termsCheckbox.checked;
+        }
+
+        termsCheckbox.addEventListener("change", updateSubmitButton);
+        updateSubmitButton(); // Initial check
+      }
+    </script>
+  </body>
+</html>

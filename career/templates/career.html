@@ -1,0 +1,449 @@
+{% extends "layout.html" %}
+{% block content %}
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        color: white;
+        min-height: 100vh;
+      }
+
+      /* Hero Section */
+      .hero-section {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        padding: 4rem 0;
+        text-align: center;
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, #fff 0%, #ccc 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+        color: #bbb;
+        max-width: 600px;
+        margin: 0 auto 2rem;
+        line-height: 1.6;
+      }
+
+      /* Main Content */
+      .content-section {
+        background: #f8f9fa;
+        color: #333;
+        padding: 4rem 0;
+        min-height: 60vh;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 3rem;
+      }
+
+      /* Student Info Cards */
+      .student-profile {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #007bff;
+      }
+
+      .student-name {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+
+      .student-class {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+
+      /* Dynamic Info Boxes */
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+        grid-auto-rows: minmax(180px, auto);
+      }
+
+      .info-box {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid #e9ecef;
+      }
+
+      .info-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Random sizes for cool effect */
+      .info-box.size-small {
+        grid-column: span 1;
+        min-height: 180px;
+      }
+
+      .info-box.size-medium {
+        grid-column: span 1;
+        min-height: 220px;
+      }
+
+      .info-box.size-large {
+        grid-column: span 2;
+        min-height: 200px;
+      }
+
+      .info-box.size-tall {
+        grid-row: span 2;
+        min-height: 300px;
+      }
+
+      .info-box-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .info-box-icon {
+        font-size: 1.5rem;
+        margin-right: 0.75rem;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: #f8f9fa;
+        color: #6c757d;
+      }
+
+      .info-box-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .info-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .info-list li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 1.5rem;
+      }
+
+      .info-list li:last-child {
+        border-bottom: none;
+      }
+
+      .info-list li:before {
+        content: "•";
+        color: #6c757d;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+        top: 0.5rem;
+      }
+
+      .single-item {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #333;
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      /* JSON Input Section */
+      .input-section {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .json-textarea {
+        min-height: 200px;
+        font-family: "Courier New", monospace;
+        font-size: 0.9rem;
+      }
+
+      .btn-parse {
+        background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 25px;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-parse:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+      }
+
+      .error-message {
+        background: #f8d7da;
+        color: #721c24;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+        border-left: 4px solid #dc3545;
+      }
+
+      main.container {
+        margin-top: 0px;
+        padding-top: 20px;
+     }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .info-grid {
+          grid-template-columns: 1fr;
+          grid-auto-rows: auto;
+        }
+
+        /* Reset random sizes on mobile for better layout */
+        .info-box {
+          grid-column: span 1 !important;
+          grid-row: span 1 !important;
+          min-height: auto !important;
+        }
+
+        
+      }
+
+      /* Animation */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .info-box {
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
+      .info-box:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .info-box:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .info-box:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .info-box:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .info-box:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .info-box:nth-child(6) {
+        animation-delay: 0.6s;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+
+    <!-- Hero Section -->
+    <!-- <section class="hero-section" style="margin-top: 70px;">
+        <div class="container">
+            <h1 class="hero-title"></h1>
+            <p class="hero-subtitle">
+                Discover the best colleges in your locality with comprehensive information about facilities, fees, and programs.
+            </p>
+        </div>
+    </section> -->
+
+    <!-- Main Content -->
+    <section class="content-section">
+      <div class="container">
+        <h2 class="section-title">Student Career Profile</h2>
+        <p class="section-subtitle">Here is your personalized Career Path.</p>
+
+        <!-- Student Profile Display -->
+        <div id="studentProfile" style="display: none">
+          <!-- Profile will be dynamically generated here -->
+        </div>
+      </div>
+    </section>
+    <div id="errorMessage" style="color: red; display: none"></div>
+{% endblock %}
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Make current user id available to JS
+  const CURRENT_USER_ID = "{{ current_user.id|tojson }}";
+
+  function showError(msg) {
+    const errorMessage = document.getElementById("errorMessage");
+    errorMessage.innerText = msg;
+    errorMessage.style.display = "block";
+  }
+
+  function createInfoBox(className, title, icon, content, isSingle = false) {
+    const sizes = ["size-small", "size-medium", "size-large", "size-tall"];
+    const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+
+    let contentHtml = "";
+    if (isSingle) {
+      contentHtml = `<div class="single-item">${content}</div>`;
+    } else if (Array.isArray(content)) {
+      contentHtml = '<ul class="info-list">';
+      content.forEach((item) => {
+        contentHtml += `<li>${item}</li>`;
+      });
+      contentHtml += "</ul>";
+    } else {
+      contentHtml = `<div class="single-item">${content}</div>`;
+    }
+
+    return `
+      <div class="info-box ${className} ${randomSize}">
+        <div class="info-box-header">
+          <div class="info-box-icon"><i class="${icon}"></i></div>
+          <h5 class="info-box-title">${title}</h5>
+        </div>
+        ${contentHtml}
+      </div>
+    `;
+  }
+
+  function displayStudentProfile(data) {
+    const container = document.getElementById("studentProfile");
+    const student = data.career?.student;
+    const careerPath = data.career?.career_path;
+
+    if (!student || !careerPath) {
+      showError("Career data missing or malformed for this user.");
+      return;
+    }
+
+    let html = `
+      <div class="student-profile">
+        <div class="student-name">
+          <i class="fas fa-user-graduate me-2"></i>
+          ${student.name}
+        </div>
+        <div class="student-class">
+          <i class="fas fa-school me-2"></i>
+          Currently in Class ${student.current_class}
+        </div>
+      </div>
+      <div class="info-grid">
+    `;
+
+    if (student.interests?.length) {
+      html += createInfoBox("interests", "Interests", "fas fa-heart", student.interests);
+    }
+    if (careerPath.undergraduate_degree?.length) {
+      html += createInfoBox("undergraduate", "Undergraduate Degree", "fas fa-graduation-cap", careerPath.undergraduate_degree);
+    }
+    if (careerPath.relevant_courses?.length) {
+      html += createInfoBox("courses", "Relevant Courses", "fas fa-book-open", careerPath.relevant_courses);
+    }
+    if (careerPath.skills?.length) {
+      html += createInfoBox("skills", "Skills", "fas fa-cogs", careerPath.skills);
+    }
+    if (careerPath.internships_and_experience?.length) {
+      html += createInfoBox("internships", "Internships & Experience", "fas fa-briefcase", careerPath.internships_and_experience);
+    }
+    if (careerPath.certifications?.length) {
+      html += createInfoBox("certifications", "Certifications", "fas fa-certificate", careerPath.certifications);
+    }
+    if (careerPath.future_roles?.length) {
+      html += createInfoBox("roles", "Future Career Roles", "fas fa-rocket", careerPath.future_roles);
+    }
+
+    html += "</div>";
+    container.innerHTML = html;
+  }
+
+  // Single unified loader
+  document.addEventListener("DOMContentLoaded", async () => {
+    const studentProfile = document.getElementById("studentProfile");
+    try {
+      // 1) Generate/update the user's career entry
+      const genRes = await fetch("/generate_career_json", { method: "POST" });
+      const genData = await genRes.json();
+      if (!genRes.ok || genData.status !== "success") {
+        throw new Error(genData.message || "Career generation failed");
+      }
+
+      // 2) Fetch the latest career.json (cache-busted)
+      const res = await fetch("{{ url_for('static', filename='career.json') }}?t=" + Date.now());
+      if (!res.ok) throw new Error(`Failed to load career.json: ${res.status}`);
+      const allData = await res.json();
+
+      // 3) Find the current user and pick the latest career item
+      const me = Array.isArray(allData)
+      ? allData.find((u) => String(u.user_id) === String(CURRENT_USER_ID))
+      : null;
+      const latest = me.career[me.career.length - 1];
+
+      // 4) Render
+      displayStudentProfile({ career: latest });
+      studentProfile.style.display = "block";
+      studentProfile.scrollIntoView({ behavior: "smooth" });
+    } catch (err) {
+      console.error(err);
+      showError("Error generating or loading career data: " + err.message);
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,268 @@
+{% extends "layout.html" %}
+{% block content %}
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg, #2c2c2c, #3d3d3d); /* dark grey */
+    }
+    .page-wrapper {
+      margin: 0 auto;
+      background: #f5f5f7;
+      min-height: 100vh;
+      padding: 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    h1 {
+      margin: 40px 0 30px;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #1d1d1f;
+      text-align: center;
+      letter-spacing: -0.5px;
+    }
+    /* Exam buttons */
+    .exam-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px auto 10px;
+      padding: 20px;
+      max-width: 1000px;
+    }
+    .exam-option {
+      background: #f0f0f3;
+      border: 1px solid #d1d1d6;
+      border-radius: 40px;
+      padding: 14px 26px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1d1d1f;
+      box-shadow: 3px 3px 6px #bebebe, -3px -3px 6px #ffffff; /* neumorphic */
+    }
+    .exam-option:hover {
+      background: #e9f2ff;
+      color: #0071e3;
+      border-color: #0071e3;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+    .exam-option.active {
+      background: #dcecff;
+      color: #0071e3;
+      border-color: #0071e3;
+      box-shadow: 0 6px 18px rgba(0,113,227,0.25);
+    }
+    /* Search bar */
+    .search-bar {
+      margin: 20px auto 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      max-width: 600px;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 30px;
+      border: 1px solid #c7c7cc;
+      outline: none;
+      font-size: 1rem;
+      background: #fff;
+      box-shadow: inset 2px 2px 5px rgba(0,0,0,0.08);
+      transition: all 0.2s ease;
+    }
+    .search-bar input:focus {
+      border-color: #0071e3;
+      box-shadow: 0 0 8px rgba(0,113,227,0.3);
+    }
+    .search-bar button {
+      padding: 12px 22px;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(145deg, #0071e3, #005bb5);
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,113,227,0.3);
+    }
+    .search-bar button:hover {
+      background: linear-gradient(145deg, #005bb5, #004080);
+    }
+    /* Results */
+    .results {
+      margin-top: 20px;
+      padding: 20px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      min-height: 200px;
+      position: relative;
+    }
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1d1d1f;
+    }
+    .card p {
+      font-size: 1rem;
+      line-height: 1.4;
+      color: #515154;
+    }
+    .card a {
+      display: inline-block;
+      margin-top: 12px;
+      color: #0071e3;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+    }
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #0071e3;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    main.container {
+    margin-top: 0px;
+    padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <h1>Select Your Exam</h1>
+
+    <div class="exam-container" id="examContainer"></div>
+
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search more exams..." oninput="searchExam()">
+      <button onclick="searchExam()">🔍</button>
+    </div>
+
+    <div class="results" id="results"></div>
+  </div>
+
+{% endblock %}
+{% block scripts %}
+
+  <script>
+    const allExams = [
+      "JEE Main","JEE Advanced","NEET UG","GATE","SAT",
+      "CAT","MAT","NDA","CLAT","Indian Navy Exam",
+      "CMAT","VITEEE","BITSAT","UPSC Civil Services","SSC CGL","SSC CHSL",
+      "IBPS PO","IBPS Clerk","SBI PO","SBI Clerk","RBI Grade B","RBI Assistant","NABARD Grade A",
+      "XAT","IIFT","SNAP","NMAT","AIIMS MBBS","JIPMER",
+      "IES","ISRO Scientist Exam","DRDO Scientist Exam","AILET","LSAT India",
+      "CUET UG","CUET PG","NET (UGC-NET)","CSIR NET","CDS","AFCAT","Indian Airforce Exam",
+      "State PSC","Railway RRB NTPC","Railway RRB Group D","Railway ALP","Railway JE",
+      "LIC AAO","LIC ADO","NIACL AO","RRB PO","RRB Clerk",
+      "WB JEE","WB NEET","MHT CET","KCET","COMEDK"
+    ];
+
+    const container = document.getElementById("examContainer");
+    const results = document.getElementById("results");
+
+    function renderExams(exams) {
+      container.innerHTML = "";
+      exams.forEach(exam => {
+        const div = document.createElement("div");
+        div.className = "exam-option";
+        div.textContent = exam;
+        div.addEventListener("click", () => {
+          document.querySelectorAll(".exam-option").forEach(el => el.classList.remove("active"));
+          div.classList.add("active");
+          fetchData(exam);
+          results.scrollIntoView({ behavior: "smooth" });
+        });
+        container.appendChild(div);
+      });
+    }
+
+    renderExams(allExams.slice(0, 12));
+
+    function searchExam() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      if (!query.trim()) {
+        renderExams(allExams.slice(0, 12));
+        return;
+      }
+      const filtered = allExams.filter(exam => exam.toLowerCase().includes(query));
+      renderExams(filtered);
+    }
+
+    async function fetchData(exam) {
+      results.innerHTML = '<div class="overlay"><div class="spinner"></div></div>';
+      try {
+        const res = await fetch(`/get_data_prep?exam=${encodeURIComponent(exam)}`);
+        const data = await res.json();
+        results.innerHTML = "";
+
+        if (data.ebooks && data.ebooks.length) {
+          const notesCard = document.createElement("div");
+          notesCard.className = "card";
+          notesCard.innerHTML = "<h3>Preparation Notes</h3><ul>" +
+            data.ebooks.map(n => `<li><a href="${n.link}" target="_blank">${n.title}</a></li>`).join("") +
+            "</ul>";
+          results.appendChild(notesCard);
+        }
+
+        if (data.courses && data.courses.length) {
+          data.courses.forEach(course => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.innerHTML = `
+              <h3>${course.title}</h3>
+              <p>${course.snippet}</p>
+              <a href="${course.link}" target="_blank">View Course</a>
+            `;
+            results.appendChild(card);
+          });
+        }
+
+        if ((!data.ebooks || !data.ebooks.length) && (!data.courses || !data.courses.length)) {
+          results.innerHTML = "<p>No data available for this exam.</p>";
+        }
+      } catch (e) {
+        results.innerHTML = "<p>Error fetching data.</p>";
+      }
+    }
+  </script>
+{% endblock %}

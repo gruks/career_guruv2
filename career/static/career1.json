@@ -1,0 +1,509 @@
+[
+  {
+    "user_id": 1,
+    "username": "Ayush",
+    "career": [
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "Bachelor of Business Administration (BBA)",
+            "Bachelor of Commerce (BCom)"
+          ],
+          "relevant_courses": [
+            "Financial Management",
+            "Marketing Management",
+            "Economics",
+            "Business Statistics",
+            "Business Analytics"
+          ],
+          "skills": [
+            "Communication",
+            "Problem-solving",
+            "Time management",
+            "Teamwork",
+            "Analytical skills"
+          ],
+          "internships_and_experience": [
+            "Management Trainee",
+            "Business Analyst Intern",
+            "Financial Planning and Analysis Intern"
+          ],
+          "certifications": [
+            "Certified Management Accountant (CMA)",
+            "Certified Business Manager (CBM)"
+          ],
+          "future_roles": [
+            "Business Analyst",
+            "Operations Manager",
+            "Financial Manager",
+            "Marketing Manager"
+          ]
+        }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "Bachelor's in Business Administration",
+            "Bachelor's in Finance"
+          ],
+          "relevant_courses": [
+            "Introduction to Business",
+            "Financial Management",
+            "Business Ethics",
+            "Marketing Principles",
+            "Organizational Behavior",
+            "Accounting Principles"
+          ],
+          "skills": [
+            "Communication",
+            "Analytical thinking",
+            "Leadership",
+            "Team management",
+            "Problem-solving",
+            "Time management"
+          ],
+          "internships_and_experience": [
+            "Internship at a financial firm",
+            "Entry-level management position at a business",
+            "Business consulting experience"
+          ],
+          "certifications": [
+            "Certified Business Analyst (CBA)",
+            "Certified Financial Manager (CFM)"
+          ],
+          "future_roles": [
+            "Financial Manager",
+            "Business Development Manager",
+            "Entrepreneur"
+          ]
+        }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "BBA",
+            "Business Administration"
+          ],
+          "relevant_courses": [
+            "Financial Management",
+            "Marketing Principles",
+            "Business Economics",
+            "Operations Management"
+          ],
+          "skills": [
+            "Financial Analysis",
+            "Data Analysis",
+            "Time Management",
+            "Leadership",
+            "Communication"
+          ],
+          "internships_and_experience": [
+            "Management Trainee",
+            "Business Analyst Intern",
+            "Small Business Consultant"
+          ],
+          "certifications": [
+            "CompTIA Business Management",
+            "Six Sigma Green Belt"
+          ],
+          "future_roles": [
+            "Business Manager",
+            "Entrepreneur",
+            "Operations Director",
+            "Supply Chain Manager"
+          ]
+        }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business, science, and technology"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "Business Administration",
+            "Management Information Systems"
+          ],
+          "relevant_courses": [
+            "Principles of Accounting",
+            "Marketing Management",
+            "Data Structures and Algorithms",
+            "Computer Systems",
+            "Business Statistics"
+          ],
+          "skills": [
+            "financial analysis",
+            "data interpretation",
+            "leadership skills",
+            "software development (Python, Java)"
+          ],
+          "internships_and_experience": [
+            "Management intern at a finance firm",
+            "Software development intern at a startup",
+            "Research project on supply chain optimization"
+          ],
+          "certifications": [
+            "Certified Management Accountant (CMA)",
+            "Certified Business Analyst (CBA)"
+          ],
+          "future_roles": [
+            "Business Analyst",
+            "Management Consultant",
+            "Data Scientist",
+            "IT Manager"
+          ]
+        }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "Bachelor's in Business Administration",
+            "Bachelor's in Finance"
+          ],
+          "relevant_courses": [
+            "Financial Management",
+            "Business Statistics",
+            "Marketing Principles",
+            "Accounting Principles",
+            "Economics"
+          ],
+          "skills": [
+            "Communication",
+            "Problem-Solving",
+            "Teamwork",
+            "Strategic Thinking",
+            "Data Analysis"
+          ],
+          "internships_and_experience": [
+            "Marketing Intern",
+            "Financial Analyst Intern",
+            "Small Business Owner/Founder"
+          ],
+          "certifications": [
+            "Certified Financial Manager (CFM)",
+            "Certified Marketing Professional (CMP)"
+          ],
+          "future_roles": [
+            "Financial Manager",
+            "Marketing Director",
+            "Entrepreneur",
+            "Business Consultant"
+          ]
+        }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "Bachelor's in Business Administration",
+            "Bachelor's in Entrepreneurship"
+          ],
+          "relevant_courses": [
+            "Financial Management",
+            "Marketing Strategies",
+            "Business Law",
+            "Operations Management"
+          ],
+          "skills": [
+            "Financial Analysis",
+            "Leadership",
+            "Communication",
+            "Problem-Solving"
+          ],
+          "internships_and_experience": [
+            "Finance Intern",
+            "Business Development Intern",
+            "Volunteer Management"
+          ],
+          "certifications": [
+            "CPA Certification",
+            "Six Sigma Certification"
+          ],
+          "future_roles": [
+            "Executive Manager",
+            "Business Owner",
+            "Corporate Finance Manager"
+          ]
+        }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "Bachelor's in Business Administration",
+            "Bachelor's in Business Analytics"
+          ],
+          "relevant_courses": [
+            "Business Statistics",
+            "Marketing Management",
+            "Corporate Finance",
+            "Business Economics"
+          ],
+          "skills": [
+            "Data analysis",
+            "Project management",
+            "Communication",
+            "Decision making",
+            "Problem solving"
+          ],
+          "internships_and_experience": [
+            "Marketing internship",
+            "Business development role",
+            "Startup founder"
+          ],
+          "certifications": [
+            "Certified Business Analyst",
+            "Certified Marketing Professional"
+          ],
+          "future_roles": [
+            "Business Analyst",
+            "Marketing Manager",
+            "Entrepreneur",
+            "Business Consultant"
+          ]
+        }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "Bachelor's in Business Administration",
+            "Bachelor's in Management"
+          ],
+          "relevant_courses": [
+            "Business Management",
+            "Economics",
+            "Accounting",
+            "Marketing",
+            "Finance",
+            "Organizational Behavior"
+          ],
+          "skills": [
+            "Leadership",
+            "Problem-solving",
+            "Communication",
+            "Team management",
+            "Data analysis"
+          ],
+          "internships_and_experience": [
+            "Management trainee at a multinational company",
+            "Volunteer coordinator at a non-profit organization"
+          ],
+          "certifications": [
+            "Certified Associate in Project Management (CAPM)",
+            "Certified Business Administration (CBA)"
+          ],
+          "future_roles": [
+            "Operations Manager",
+            "Business Analyst",
+            "Management Consultant",
+            "Executive Director"
+          ]
+        }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "Bachelor of Business Administration",
+            "Bachelor of Science in Business Administration"
+          ],
+          "relevant_courses": [
+            "Principles of Management",
+            "Business Communications",
+            "Marketing Management",
+            "Financial Management",
+            "Organizational Behavior"
+          ],
+          "skills": [
+            "leadership",
+            "problem-solving",
+            "team management",
+            "strategic planning",
+            "communication",
+            "budgeting"
+          ],
+          "internships_and_experience": [
+            "Management Trainee",
+            "Junior Business Analyst"
+          ],
+          "certifications": [
+            "CPA",
+            "CFA"
+          ],
+          "future_roles": [
+            "Management Consultant",
+            "Business Development Manager",
+            "Financial Manager",
+            "Human Resources Manager"
+          ]
+        }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business, science, economics, statistics, information systems"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "BCom in Economics",
+            "BSc in Information Systems",
+            "BBA in Business Administration"
+          ],
+          "relevant_courses": [
+            "Economics of Business",
+            "Business Statistics",
+            "Information Systems Management",
+            "Data Analysis and Interpretation",
+            "Quantitative Methods in Business"
+          ],
+          "skills": [
+            "data analysis",
+            "business strategy",
+            "problem-solving",
+            "communication",
+            "team management"
+          ],
+          "internships_and_experience": [
+            "Operations Intern at XYZ Corporation",
+            "Data Analyst at ABC Agency",
+            "Business Analyst at a startup"
+          ],
+          "certifications": [
+            "Certified Analytics Professional (CAP)",
+            "Project Management Professional (PMP)",
+            "Certified Information Systems Security Professional (CISSP)"
+          ],
+          "future_roles": [
+            "Business Analyst",
+            "Management Consultant",
+            "Financial Analyst",
+            "Operations Manager",
+            "Chief Information Officer (CIO)"
+          ]
+        }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business, sports, science, innovation, success, international relations"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "Bachelor's Degree in Business Administration",
+            "Bachelor's Degree in Business Management"
+          ],
+          "relevant_courses": [
+            "Principles of Management",
+            "Economics for Business",
+            "Business Analytics",
+            "Global Supply Chain Management"
+          ],
+          "skills": [
+            "Leadership",
+            "Problem-solving",
+            "Communication",
+            "Analytical thinking"
+          ],
+          "internships_and_experience": [
+            "Entrepreneurship competition participation",
+            "Volunteering for business mentorship programs",
+            "Business plan competition experience"
+          ],
+          "certifications": [
+            "Certified Management Consultant (CMC)",
+            "Certified Business Analysis Professional (CBAP)"
+          ],
+          "future_roles": [
+            "Business Consultant",
+            "Business Development Manager",
+            "Management Analyst",
+            "Operations Manager"
+          ]
+        }
+      },
+      {
+        "student": {
+          "name": "Ayush",
+          "current_class": null,
+          "interests": "business"
+        },
+        "career_path": {
+          "undergraduate_degree": [
+            "Bachelor of Business Administration (BBA)",
+            "Bachelor of Commerce (BCom)"
+          ],
+          "relevant_courses": [
+            "Financial Management",
+            "Accounting",
+            "Marketing Management",
+            "Business Statistics",
+            "Organizational Behaviour"
+          ],
+          "skills": [
+            "Financial analysis",
+            "Data analysis",
+            "Communication",
+            "Leadership",
+            "Problem-solving"
+          ],
+          "internships_and_experience": [
+            "Management trainee",
+            "Marketing intern",
+            "Financial analyst"
+          ],
+          "certifications": [
+            "Certified Management Accountant (CMA)",
+            "Certified Financial Analyst (CFA)"
+          ],
+          "future_roles": [
+            "Management Consultant",
+            "Investment Banker",
+            "Business Development Manager",
+            "Financial Manager",
+            "Executive Director"
+          ]
+        }
+      }
+    ]
+  }
+]
