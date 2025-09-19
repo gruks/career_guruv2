@@ -323,8 +323,9 @@ Do not include any text outside JSON.
                     "raw": inner_json_str
                 }), 500
 
-        # --- File path for storage ---
-        file_path = os.path.join(current_app.static_folder, "career1.json")
+
+        # --- File path for storage (fix: use career.json) ---
+        file_path = os.path.join(current_app.static_folder, "career.json")
         if not os.path.exists(file_path):
             with open(file_path, "w", encoding="utf-8") as f:
                 json.dump([], f)
