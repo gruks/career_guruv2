@@ -27,6 +27,15 @@ def create_app(config_class=Config):
     app = Flask(__name__, static_url_path="/")
     app.config.from_object(config_class)
 
+    # Use PostgreSQL if DATABASE_URL is set, else fallback to SQLite for local dev
+    db_url = os.environ.get('DATABASE_URL')  # Provided by Render
+    if db_url:
+        app.config['SQLALCHEMY_DATABASE_URI'] = db_url
+    else:
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
     # Init extensions
     db.init_app(app)
     bcrypt.init_app(app)
@@ -41,5 +50,9 @@ def create_app(config_class=Config):
 
     # Enable CORS for all routes or specific routes
     CORS(app, resources={r"/data": {"origins": "http://127.0.0.1:5000"}})
+
+    # --- AUTO CREATE TABLES ---
+    with app.app_context():
+        db.create_all()
 
     return app
