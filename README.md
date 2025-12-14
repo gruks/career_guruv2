@@ -1,71 +1,104 @@
-# 🎓 CareerGuru — AI-Powered Career Guidance Platform
+# CareerGuru — AI-Powered Career Guidance Platform
 
 **Live Demo:** [career-guruv2-3.onrender.com/home](https://career-guruv2-3.onrender.com/home)
 
-CareerGuru is an **AI-driven career guidance platform** built to help students discover the right career paths, prepare effectively, and make informed education decisions.  
-It combines smart recommendations, degree comparisons, and free study resources — all powered by **Flask**, **PostgreSQL**, and advanced **AI APIs**.
+CareerGuru is a comprehensive AI-driven career guidance platform designed to empower students in discovering optimal career paths, preparing effectively for their chosen fields, and making informed educational decisions. The platform integrates intelligent recommendation systems, detailed degree comparisons, and curated free study resources, all powered by a robust technology stack including Flask, PostgreSQL, and advanced AI APIs.
 
----
+## Table of Contents
+- [Features](#features)
+- [Technical Architecture](#technical-architecture)
+- [Authentication](#authentication)
+- [API Integrations](#api-integrations)
+- [Deployment](#deployment)
+- [Local Installation](#local-installation)
+- [Contributing](#contributing)
+- [License](#license)
 
-## 🌟 Features
+## Features
 
-### 🧭 Personalized Career Guidance
-- AI-powered recommendations based on students’ interests, academic background, and goals.  
-- Insights on suitable degree programs, potential job roles, and career growth paths.
+### Personalized Career Guidance
+CareerGuru leverages advanced AI algorithms to deliver highly personalized career recommendations based on:
+- Students' academic background and performance
+- Personal interests and aptitude assessments
+- Long-term career goals and preferences
+- Market demand and emerging industry trends
 
-### 🧠 Smart Career Prep
-- AI tools to help students prepare for their chosen fields.
-- Tailored advice, resource links, and preparation roadmaps.
+Users receive detailed insights including suitable degree programs, potential job roles, expected salary ranges, and comprehensive career growth trajectories.
 
-### ⚖️ Degree Comparison
-- Compare multiple degrees or career options side-by-side.
-- Get detailed insights on curriculum, job prospects, and salary expectations.
+### Smart Career Preparation Tools
+The platform provides specialized preparation resources tailored to each user's selected career path:
+- Customized study roadmaps and preparation timelines
+- Targeted skill development recommendations
+- Practice resources and assessment tools
+- Direct links to relevant learning materials
 
-### 📚 Free Study Resources
-- Curated open-source learning materials, books, and online courses.  
-- Helps students upskill without expensive tuition fees.
+### Advanced Degree Comparison
+Students can perform side-by-side comparisons of multiple degree programs and career options, gaining insights into:
+- Curriculum structure and course requirements
+- Duration, cost, and entry requirements
+- Job placement rates and alumni success metrics
+- Salary expectations and career progression opportunities
 
-### 🤖 Powered by AI
-- **Groq API:** Delivers intelligent, fast responses for career and learning recommendations.  
-- **Serp API:** Fetches real-time educational and career data from the web.
+### Curated Free Study Resources
+Access a comprehensive library of free, high-quality learning materials including:
+- Open-source textbooks and academic papers
+- MOOC courses from leading universities
+- Interactive tutorials and video lectures
+- Practice exams and certification prep materials
 
----
+## Technical Architecture
 
-## 🧩 Tech Stack
+| Layer | Technologies | Purpose |
+|-------|--------------|---------|
+| **Frontend** | HTML5, CSS3, JavaScript | Responsive user interface and dynamic content rendering |
+| **Backend** | Flask (Python 3.9+) | RESTful API development and business logic |
+| **Database** | PostgreSQL 15+ | User data, career profiles, and recommendation storage |
+| **Authentication** | JWT (JSON Web Tokens) | Secure user session management |
+| **AI/ML APIs** | Groq API, Serp API | Intelligent recommendations and real-time data |
+| **Deployment** | Render | Production hosting and auto-scaling |
+| **Version Control** | Git/GitHub | Source code management |
 
-| Layer | Technologies |
-|-------|---------------|
-| **Frontend** | HTML5, CSS3, JavaScript |
-| **Backend** | Flask (Python) |
-| **Database** | PostgreSQL |
-| **Authentication** | JWT (JSON Web Tokens) |
-| **APIs Used** | Groq API, Serp API |
-| **Deployment** | Render |
+## Authentication
 
----
+CareerGuru implements secure JWT-based authentication with the following features:
+- Secure user registration and password hashing (bcrypt)
+- Token-based session management with automatic refresh
+- Role-based access control
+- Password reset functionality via email
+- Session timeout and security headers
 
-## 🔐 Authentication
+All user data is encrypted and protected according to industry best practices.
 
-CareerGuru uses **JWT-based authentication** to ensure secure login and data access for users.  
-Students can register, sign in, and maintain personalized data safely.
+## API Integrations
 
----
+### Groq API
+Provides lightning-fast AI inference for:
+- Career path recommendations
+- Personalized learning suggestions
+- Natural language processing of user inputs
+- Real-time career advice generation
 
-## 🚀 Deployment
+### Serp API
+Enables real-time web data extraction for:
+- Current job market trends
+- Educational program details
+- Salary and employment statistics
+- Industry news and developments
 
-The website is fully deployed on **Render** for fast, reliable, and scalable hosting.
+## Deployment
 
-**Live Site:**  
-👉 [https://career-guruv2-3.onrender.com/home](https://career-guruv2-3.onrender.com/home)
+The platform is deployed on Render with zero-downtime deployments and automatic scaling.
 
----
+**Production URL:**  
+[https://career-guruv2-3.onrender.com/home](https://career-guruv2-3.onrender.com/home)
 
-## 🛠️ Installation (For Local Setup)
+## Local Installation
 
-If you want to run the project locally:
+Follow these steps to set up CareerGuru locally:
+
 
 ```bash
-# 1. Clone the repository
+1. **Clone the repository**
 git clone https://github.com/yourusername/career-guru.git
 cd career-guru
 
@@ -87,3 +120,17 @@ SERP_API_KEY=your_serp_key
 
 # 5. Run the Flask app
 flask run
+```
+The application will be available at `http://localhost:5000`.
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
